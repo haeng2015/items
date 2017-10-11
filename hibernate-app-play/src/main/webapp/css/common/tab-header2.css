@@ -1,0 +1,55 @@
+
+.purchaser-ul-li{
+	width: 100px;
+	font-size: 14px;
+	font-weight: 100;
+}
+.clearfix {
+	clear: both;
+}
+
+#container {
+	width: 100%;
+	/* margin: 0 auto; */
+	background: #fafafa;
+}
+
+#container div {
+	/* padding: 20px; */
+}
+.purchaser-maintenanceList{
+	height: 22px;
+    overflow: hidden;
+    padding: 4px 12px 0 12px;
+    margin-right: 3px;
+    background: url('../images/search_bg.gif') repeat-x;
+    border: 1px solid #ddd;
+    border-width: 1px 1px 0px 1px;
+    text-align: center;
+    font-size: 12px;
+    color: #000;
+}
+
+#mainbar {
+    padding: 0px;
+    margin: 0;
+    border-bottom: 2px #fafafa solid;
+    text-align: left;
+}
+
+.datagrid-btn{
+	padding: 4px 10px;
+	border: 1px solid #ffffff;
+	color: #ffffff;
+	cursor: pointer;
+	background: #19BF19;
+	text-decoration:none;
+}
+.datagrid-btn1{
+	padding: 4px 10px;
+	border: 1px solid #ffffff;
+	color: #ffffff;
+	cursor: pointer;
+	background: silver;
+	text-decoration:none;
+}

@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="boUserMapper">
+
+	<!-- 关联查询（role/auth）查到该用户的角色以及对应的所有权限(5表联查) -->
+	<resultMap id="BaseResultMap" type="com.pbms.pojo.BoUser">
+		<id column="USER_ID" property="userId" jdbcType="INTEGER" />
+		<result column="USER_LOGIN" property="userLogin" jdbcType="VARCHAR" />
+		<result column="USER_PWD" property="userPwd" jdbcType="VARCHAR" />
+		<result column="USER_NAME" property="userName" jdbcType="VARCHAR" />
+		<result column="USER_SEX" property="userSex" jdbcType="CHAR" />
+		<result column="USER_TYPE" property="userType" jdbcType="CHAR" />
+		<result column="USER_PHONE" property="userPhone" jdbcType="VARCHAR" />
+		<result column="USER_QQ" property="userQq" jdbcType="VARCHAR" />
+		<result column="USER_MSN" property="userMsn" jdbcType="VARCHAR" />
+		<result column="USER_CARD" property="userCard" jdbcType="VARCHAR" />
+		<result column="USRE_PHOTO" property="userPhoto" jdbcType="VARCHAR" />
+		<result column="IS_DELETED" property="isDeleted" jdbcType="CHAR" />
+		<result column="EXTEND1" property="extend1" jdbcType="VARCHAR" />
+		<result column="EXTEND2" property="extend2" jdbcType="VARCHAR" />
+		<!-- 关联userRole表 （一对多） -->
+		<collection property="userRoleList" ofType="com.pbms.pojo.UserRole">
+			<!-- <collection property="userRoleList" ofType="com.pbms.pojo.UserRole" select="userRoleMapper.BaseResultMap"> -->
+			<id column="ID" property="id" jdbcType="INTEGER" />
+			<!-- 关联role表(一对一) -->
+			<association property="role" javaType="com.pbms.pojo.BoRole">
+				<id column="ROLE_ID" property="roleId" jdbcType="INTEGER" />
+				<result column="ROLE_NAME" property="roleName" jdbcType="VARCHAR" />
+				<result column="ROLE_TYPE" property="roleType" jdbcType="VARCHAR" />
+				<result column="EXTEND1" property="extend1" jdbcType="VARCHAR" />
+				<result column="EXTEND2" property="extend2" jdbcType="VARCHAR" />
+				<!-- 关联roleAuth表（一对多） -->
+				<collection property="roleAuthList" ofType="com.pbms.pojo.RoleAuth">
+					<id column="ID" property="id" jdbcType="INTEGER" />
+					<!-- 关联auth表（一对一） -->
+					<association property="auth" javaType="com.pbms.pojo.BoAuth">
+						<id column="AUTH_ID" property="authId" jdbcType="INTEGER" />
+						<result column="P_ID" property="pId" jdbcType="INTEGER" />
+						<result column="AUTH_NAME" property="authName" jdbcType="VARCHAR" />
+						<result column="AUTH_URL" property="authUrl" jdbcType="VARCHAR" />
+						<result column="AUTH_TYPE" property="authType" jdbcType="VARCHAR" />
+						<result column="IS_LEAFNODE" property="isLeafNode" jdbcType="CHAR" />
+						<result column="EXTEND1" property="extend1" jdbcType="VARCHAR" />
+						<result column="EXTEND2" property="extend2" jdbcType="VARCHAR" />
+
+						<collection column="AUTH_ID" ofType="com.pbms.pojo.BoAuth" property="childrens" javaType="java.util.ArrayList"
+							select="boAuthMapper.selectFks"></collection>
+					</association>
+				</collection>
+			</association>
+		</collection>
+	</resultMap>
+
+	<sql id="User_Column_List">
+		USER_ID, USER_LOGIN, USER_PWD, USER_NAME, USER_SEX,
+		USER_TYPE, USER_PHONE, USER_CARD,
+		USER_QQ,USRE_PHOTO,
+		USER_MSN, IS_DELETED,
+		EXTEND1, EXTEND2
+	</sql>
+
+	<!-- 只要是#{}这种形式的，都会以？形式替代，对应字符串形式，都会加上引号 -->
+	<!-- 只要是${}这种形式的，不会用？形式替代，传过来什么，就什么替代 -->
+	<select id="get" resultMap="BaseResultMap" parameterType="java.lang.String" useCache="true">
+		select
+		<include refid="User_Column_List" />
+		from bo_user
+		where USER_LOGIN = #{userLogin,jdbcType=VARCHAR}
+	</select>
+
+	<!-- 根据条件查找 -->
+	<select id="selectFk" resultMap="BaseResultMap" parameterType="com.pbms.vo.UserVO">
+		select
+		<include refid="User_Column_List" />
+		from bo_user
+		<where>
+			<if test="userType != null and userType != ''">
+				USER_TYPE = #{userType,jdbcType=VARCHAR}
+			</if>
+			<if test="userLogin != null and userLogin != ''">
+				AND USER_LOGIN = #{userLogin,jdbcType=VARCHAR}
+			</if>
+			<if test="userPhone != null and userPhone != ''">
+				AND USER_PHONE = #{userPhone,jdbcType=VARCHAR}
+			</if>
+			<if test="userCard != null and userCard != ''">
+				AND USER_CARD = #{userCard,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<!-- 根据用户名和密码查询 -->
+	<select id="findBoUserByNameAndPwd" resultMap="BaseResultMap" parameterType="com.pbms.pojo.BoUser">
+		select
+		<include refid="User_Column_List" />
+		from bo_user
+		where USER_LOGIN = #{userLogin,jdbcType=VARCHAR}
+		and USER_PWD = #{userPwd,jdbcType=VARCHAR}
+	</select>
+
+	<!-- 根据id查询 -->
+	<select id="findBoUserById" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+		select
+		<include refid="User_Column_List" />
+		from bo_user
+		where USER_ID = #{userId,jdbcType=INTEGER}
+	</select>
+
+	<!-- 带分页的全部查询 -->
+	<!-- 通过_parameter.containsKey('roleName')检查是否存在该值，直接填写key值即可取到map的value值 -->
+	<!-- #{value}方式会自动添加单引号将值当字符串处理，${value}会将值当原始的处理 -->
+	<select id="pageDataGrid" resultMap="BaseResultMap" parameterType="java.util.Map">
+		SELECT
+		<include refid="User_Column_List" />
+		FROM bo_user user
+		<where>
+			<!-- 此两种判断map参数值是否为空的方法无效（取map参数的值不能通过params.key取的，而是直接写key值） -->
+			<!-- <if test="_parameter.containsKey('buildName') != null"> -->
+			<!-- <if test="params != null"> -->
+
+			<if test="userName != null and userName !=''">
+				<!-- AND build.BUILD_NAME LIKE CONCAT('%', CONCAT(${buildName}, '%')) -->
+				AND user.USER_NAME LIKE '%${userName}%'
+			</if>
+			AND user.IS_DELETED = '0'
+			AND user.USER_TYPE != '1'
+		</where>
+		<if test="params != null">
+			ORDER BY user.${orderColumn} ${orderTurn}
+		</if>
+		<!-- 已在后台RowBounds分页，故无需在此limit -->
+		<!-- LIMIT #{pageNo, jdbcType=INTEGER} , #{pageSize,jdbcType=INTEGER} -->
+
+		<!-- SELECT r.* FROM (SELECT * FROM bo_role role WHERE role.ROLE_NAME LIKE '%员%' LIMIT 1 ,5) r ORDER BY r.ROLE_NAME ASC -->
+	</select>
+
+	<!-- 根据条件查找实体记录数 -->
+	<select id="countParam" resultType="java.lang.Integer" parameterType="java.util.Map">
+		SELECT COUNT(u.USER_ID) FROM
+		(SELECT user.USER_ID FROM bo_user user
+		<where>
+			<if test="userName != null and userName !=''">
+				<!-- AND build.BUILD_NAME LIKE CONCAT('%', CONCAT(${buildName}, '%')) -->
+				AND user.USER_NAME LIKE '%${userName}%'
+			</if>
+			AND IS_DELETED = '0'
+			AND user.USER_TYPE != '1'
+		</where>
+		) u
+	</select>
+
+
+	<!-- 获得分页后的实体对象列表 -->
+	<select id="getEntityByPager" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+		SELECT u.* FROM
+		(SELECT user.* FROM bo_user
+		user WHERE IS_DELETED = '0') AS u
+		LIMIT #{pageNo, jdbcType=INTEGER} , #{pageSize,jdbcType=INTEGER}
+	</select>
+	<!-- 获得总页数(传入要查询的范围从pageNo开始，查pageSize多条数据) -->
+	<select id="getTotalCount" resultType="java.lang.Integer" parameterType="java.lang.Integer">
+		SELECT count(u.id) FROM
+		(SELECT uu.uid AS
+		id FROM
+		(SELECT user.USER_ID AS uid FROM bo_user user WHERE IS_DELETED='0') AS uu
+		LIMIT #{pageNo, jdbcType=INTEGER} ,
+		#{pageSize,jdbcType=INTEGER}) AS u
+	</select>
+
+	<delete id="delete" parameterType="java.lang.Integer">
+		delete from
+		bo_user
+		where USER_ID = #{userId,jdbcType=INTEGER}
+	</delete>
+
+	<!-- 配置插入对象后返回该对象的id：（mysql） “keyProperty”表示返回的id要保存到对象的那个属性中 “useGeneratedKeys”表示主键id为自增长模式 -->
+
+	<!-- oracle保存对象后获得主键方式： <insert id="insert" parameterType="com.test.User"> <selectKey resultType="INTEGER" order="BEFORE" 
+		keyProperty="userId"> SELECT SEQ_USER.NEXTVAL as userId from DUAL </selectKey> insert into user (user_id, user_name, modified, 
+		state) values (#{userId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{modified,jdbcType=TIMESTAMP}, #{state,jdbcType=INTEGER}) 
+		</insert> -->
+	<insert id="insertSelective" parameterType="com.pbms.pojo.BoUser" keyProperty="userId" useGeneratedKeys="true">
+		insert into bo_user
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="userId != null">
+				USER_ID,
+			</if>
+			<if test="userLogin != null and userLogin != ''">
+				USER_LOGIN,
+			</if>
+			<if test="userPwd != null">
+				USER_PWD,
+			</if>
+			<if test="userName != null">
+				USER_NAME,
+			</if>
+			<if test="userSex != null">
+				USER_SEX,
+			</if>
+			<if test="userType != null">
+				USER_TYPE,
+			</if>
+			<if test="userPhone != null">
+				USER_PHONE,
+			</if>
+			<if test="userCard != null">
+				USER_CARD,
+			</if>
+			<if test="userQq != null">
+				USER_QQ,
+			</if>
+			<if test="userMsn != null">
+				USER_MSN,
+			</if>
+			<if test="userPhoto != null">
+				USRE_PHOTO,
+			</if>
+			<if test="isDeleted != null">
+				IS_DELETED,
+			</if>
+			<if test="extend1 != null">
+				EXTEND1,
+			</if>
+			<if test="extend2 != null">
+				EXTEND2,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="userId != null">
+				#{userId,jdbcType=INTEGER},
+			</if>
+			<if test="userLogin != null and userLogin != ''">
+				#{userLogin,jdbcType=VARCHAR},
+			</if>
+			<if test="userPwd != null">
+				#{userPwd,jdbcType=VARCHAR},
+			</if>
+			<if test="userName != null">
+				#{userName,jdbcType=VARCHAR},
+			</if>
+			<if test="userSex != null">
+				#{userSex,jdbcType=CHAR},
+			</if>
+			<if test="userType != null">
+				#{userType,jdbcType=CHAR},
+			</if>
+			<if test="userPhone != null">
+				#{userPhone,jdbcType=VARCHAR},
+			</if>
+			<if test="userCard != null">
+				#{userCard,jdbcType=VARCHAR},
+			</if>
+			<if test="userQq != null">
+				#{userQq,jdbcType=VARCHAR},
+			</if>
+			<if test="userMsn != null">
+				#{userMsn,jdbcType=VARCHAR},
+			</if>
+			<if test="userPhoto != null">
+				#{userPhoto,jdbcType=VARCHAR},
+			</if>
+			<if test="isDeleted != null">
+				#{isDeleted,jdbcType=CHAR},
+			</if>
+			<if test="extend1 != null">
+				#{extend1,jdbcType=VARCHAR},
+			</if>
+			<if test="extend2 != null">
+				#{extend2,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+
+	<update id="updateSelective" parameterType="com.pbms.pojo.BoUser">
+		update bo_user
+		<set>
+			<if test="userLogin != null and userLogin != ''">
+				USER_LOGIN = #{userLogin,jdbcType=VARCHAR},
+			</if>
+			<if test="userPwd != null">
+				USER_PWD = #{userPwd,jdbcType=VARCHAR},
+			</if>
+			<if test="userName != null">
+				USER_NAME = #{userName,jdbcType=VARCHAR},
+			</if>
+			<if test="userSex != null">
+				USER_SEX = #{userSex,jdbcType=CHAR},
+			</if>
+			<if test="userType != null">
+				USER_TYPE = #{userType,jdbcType=CHAR},
+			</if>
+			<if test="userPhone != null">
+				USER_PHONE = #{userPhone,jdbcType=VARCHAR},
+			</if>
+			<if test="userCard != null">
+				USER_CARD = #{userCard,jdbcType=VARCHAR},
+			</if>
+			<if test="userQq != null">
+				USER_QQ = #{userQq,jdbcType=VARCHAR},
+			</if>
+			<if test="userMsn != null">
+				USER_MSN = #{userMsn,jdbcType=VARCHAR},
+			</if>
+			<if test="userPhoto != null">
+				USRE_PHOTO = #{userPhoto,jdbcType=VARCHAR},
+			</if>
+			<if test="isDeleted != null">
+				IS_DELETED = #{isDeleted,jdbcType=CHAR},
+			</if>
+			<if test="extend1 != null">
+				EXTEND1 = #{extend1,jdbcType=VARCHAR},
+			</if>
+			<if test="extend2 != null">
+				EXTEND2 = #{extend2,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where USER_ID = #{userId,jdbcType=INTEGER}
+	</update>
+
+</mapper>

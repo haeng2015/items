@@ -1,0 +1,30 @@
+﻿
+
+/*左边导航*/
+.cont {width: 190px;background:#fdf8f3;position: relative;z-index: 9999; position:absolute; top:30px;left:0}
+.cont .item {height:30px; cursor: pointer;}
+.cont .item h3 { height: 30px;line-height: 30px;font-weight: normal;width: 190px;overflow: hidden;color: #ffffff;border-bottom:1px solid #fdebd7;}
+.cont .hover h3 {position: relative;z-index: 13;background: #fff;}
+.cont .item h3 i {margin: 0 10px 0 10px;color: #ff1c1c;font-size:20px;float: left;width: 20px;text-align: center;}
+.cont .item h3 span {margin: 0 20px 0 0;color: #ff921e;float: right;}
+.cont .item h3 a {color: #000;}
+.cont .item-list {display: none;position: absolute;width: 705px;min-height: 38px;_height: 38px;background:#fff;left: 190px;box-shadow: 0px 0px 10px #DDDDDD;border: 1px solid #DDD;z-index: 10;}
+.cont .item-list .subitem { padding: 0px 4px 0px 8px;}
+.cont .item-list .subitem dl {border-top: 1px solid #EEE;padding: 6px 0px; overflow: hidden; zoom: 1;}
+.cont .item-list .subitem dt {float: left;width: 54px;line-height: 22px;text-align: right;padding: 3px 6px 0px 0px;font-weight: 700;color: #E4393C;}
+.cont .item-list .subitem dt a {color: #e62828;text-decoration: underline;}
+.cont .item-list .subitem dd {float: left;width: 415px;padding: 3px 0px 0px;overflow: hidden;}
+.cont .item-list .subitem dd em {float: left;height: 14px;line-height: 14px;padding: 0px 8px;margin-top: 5px;border-left: 1px solid #CCC;}
+
+
+
+
+
+
+
+
+
+
+
+
+

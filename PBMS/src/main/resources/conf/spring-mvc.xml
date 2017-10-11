@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:task="http://www.springframework.org/schema/task" xmlns:sec="http://www.springframework.org/schema/security"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd 
+        http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.2.xsd
+        http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.1.xsd
+        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd">
+
+	<!-- 过滤器链 -->
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<!-- 各个模块都使用权限过滤，只拦截以这些开头的请求路径 -->
+			<mvc:mapping path="/user/**" />
+			<mvc:mapping path="/build/**" />
+			<mvc:mapping path="/room/**" />
+			<mvc:mapping path="/owner/**" />
+			<mvc:mapping path="/charge/**" />
+			<!-- 调用自定义的拦截器 -->
+			<bean class="com.pbms.interceptor.AuthInterceptor"></bean>
+		</mvc:interceptor>
+	</mvc:interceptors>
+
+	<!-- 启动springMVC的注解驱动 ，然后Spring会自动为我们注册RequestMappingHandlerMapping，RequestMappingHandlerAdapter等Bean到工厂中，来处理我们的请求。 -->
+	<mvc:annotation-driven>
+		<mvc:message-converters>
+			<bean class="org.springframework.http.converter.ByteArrayHttpMessageConverter" />
+			<bean class="org.springframework.http.converter.FormHttpMessageConverter" />
+			<bean class="org.springframework.http.converter.xml.SourceHttpMessageConverter" />
+			<bean class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter" />
+		</mvc:message-converters>
+	</mvc:annotation-driven>
+
+	<!-- 通过以上方式选择启动springMVC的某个注解功能，或者如下方式直接默认全部启动 -->
+	<!-- <mvc:annotation-driven /> -->
+
+	<!-- <context:component-scan base-package="com.gray"> <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" 
+		/> <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service" /> </context:component-scan> -->
+
+	<!-- 使用CGLib动态代理技术织入增强.即使proxy-target-class设置为false，如果目标类没有声明接口，则spring将自动使用CGLib动态代理 -->
+	<aop:aspectj-autoproxy proxy-target-class="true">
+		<aop:include name="controllerAspect" />
+	</aop:aspectj-autoproxy>
+
+
+	<!-- MVC的注解配置：这里只需要初始化controller的注解，如果把service包也加进去，会覆盖spring大容器的配置，使事务失效 -->
+	<context:component-scan base-package="com.pbms.controller" />
+
+	<!-- 静态文件的配置（也可以在web.xml文件中配置），不经过controller等处理 -->
+	<!-- <mvc:resources mapping="/resources/**" location="/resources/" /> <mvc:resources mapping="/css/**" location="/css/" 
+		/> <mvc:resources mapping="/images/**" location="/images/" /> <mvc:resources mapping="/js/**" location="/js/" /> -->
+
+	<!-- 权限过滤器链 -->
+	<!-- <mvc:interceptors> <mvc:interceptor> <mvc:mapping path="/purchaser/**"/> <mvc:mapping path="/facilitator/**"/> <mvc:mapping 
+		path="/outsource/**"/> <mvc:mapping path="/supplier/**"/> <mvc:mapping path="/company/**"/> <bean class="com.panasign.intercepter.PrivilegeIntecepter"></bean> 
+		</mvc:interceptor> </mvc:interceptors> -->
+
+	<mvc:annotation-driven>
+		<!-- 全局时间格式 -->
+		<mvc:message-converters>
+			<!-- Jackson转换器 -->
+			<bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+				<property name="objectMapper">
+					<bean class="com.fasterxml.jackson.databind.ObjectMapper">
+						<property name="dateFormat">
+							<bean class="java.text.SimpleDateFormat">
+								<constructor-arg type="java.lang.String" value="yyyy-MM-dd HH:mm:ss" />
+								<!-- <constructor-arg type="java.lang.String" value="yyyy-MM-dd" /> -->
+							</bean>
+						</property>
+					</bean>
+				</property>
+			</bean>
+		</mvc:message-converters>
+	</mvc:annotation-driven>
+
+	<!-- 阿里巴巴的fastjson转换器配置 -->
+	<!-- <mvc:annotation-driven> <mvc:message-converters register-defaults="true"> <bean class="com.pbms.util.MappingFastJsonHttpMessageConverter"> 
+		<property name="supportedMediaTypes" value="application/json" /> <property name="serializerFeature"> <array> <value>WriteMapNullValue</value> 
+		<value>QuoteFieldNames</value> </array> </property> </bean> </mvc:message-converters> </mvc:annotation-driven> -->
+
+	<!-- 视图解析 -->
+	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix">
+			<value>/WEB-INF/</value>
+		</property>
+		<property name="suffix">
+			<value>.jsp</value>
+		</property>
+	</bean>
+
+	<!-- 避免IE执行AJAX时,返回JSON出现下载文件 -->
+	<bean id="mappingJacksonHttpMessageConverter" class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
+		<property name="supportedMediaTypes">
+			<list>
+				<value>text/html;charset=UTF-8</value>
+				<value>application/json;charset=UTF-8</value>
+				<!-- <value>*/*</value> -->
+			</list>
+		</property>
+	</bean>
+
+	<!-- 启动Spring MVC的注解功能，完成请求和注解POJO的映射 -->
+	<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+		<property name="messageConverters"><!-- json转换器 -->
+			<list>
+				<ref bean="mappingJacksonHttpMessageConverter" />
+			</list>
+		</property>
+	</bean>
+
+	<!-- 文件上传 -->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<!-- 默认编码 -->
+		<property name="defaultEncoding" value="utf-8" />
+		<!-- 最大内存大小 -->
+		<property name="maxInMemorySize" value="10240" />
+		<!-- 上传临时目录（缓冲目录） -->
+		<property name="uploadTempDir" value="/uploadCache/" />
+		<!-- 最大文件大小，-1为无限制 -->
+		<property name="maxUploadSize" value="-1" />
+	</bean>
+
+	<!-- 文件解决异常跳转 -->
+	<bean id="exceptionResolver" class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+		<property name="exceptionMappings">
+			<props>
+				<!-- 遇到MaxUploadSizeExceededException异常时，自动跳转到/WEB-INF/jsp/error_fileupload.jsp页面 -->
+				<prop key="org.springframework.web.multipart.MaxUploadSizeExceededException">error_fileupload</prop>
+			</props>
+		</property>
+	</bean>
+
+</beans>

@@ -1,0 +1,149 @@
+﻿body,form,ul{margin:0px; padding:0px;}
+body{font-size:12px;}
+.clear{clear:both}
+/*--------------------------------------------
+container
+--------------------------------------------*/
+div.examples_body {
+     width: 750px;
+	/*  margin: 50px auto; */
+	 
+}
+h2.title_name {
+     /* font-family: normal Georgia,'Times New Roman',Times,serif; */
+	 font-weight: normal;
+     font-size: 4em;
+     padding: 50px 0 20px 0;
+     text-align: center;
+}
+h2.title_name span {
+	 /* font-family: normal Georgia,'Times New Roman',Times,serif; */
+    /*  color: #AAA; */
+     font-size: 0.9em;
+}
+h2.title_name small {
+     color: #AAAAAA;
+     display: block;
+     /* font-family: normal Verdana,Arial,Helvetica,sans-serif; */
+     font-size: 0.2em;
+     letter-spacing: 1.0em;
+     text-transform: uppercase;
+}
+div.examples_body h3 {
+     color: #555;
+     font-size: 130%;
+	 padding-bottom: 15px;
+	 margin-bottom: 15px;
+}
+p.demo_btn {
+     width: 750px;
+	 margin: 30px auto;
+	 font-size: 0;
+	 text-indent: -9999px;
+	 clear: both;
+	 overflow: hidden;
+}
+p.demo_btn a {
+     width: 160px;
+	 height: 41px;
+	 float: right;
+    /*  background: url(../images/Download_Button.gif) no-repeat; */
+}
+p.demo_btn a:hover {
+     /* background: url(../images/Download_Button_o.gif) no-repeat; */
+}
+
+/*--------------------------------------------*/
+div.examples_body_wrap h3 {
+     color: #f9f66d;
+     font-size: 130%;
+	 padding-bottom: 10px;
+	 margin-bottom: 15px;
+	/*  background: url(http://sunflowamedia.com/images/solid-line-news.gif) repeat-x bottom; */
+}
+div.examples_body_wrap {
+    /* width: 750px; */
+	margin: 50px auto 0 auto;
+	clear: both;
+}
+
+ul.topnav {
+	/* width: 710px; */
+	float: left;
+	background: #00a9ba;
+	/* background: url(../images/topnav_bg.gif) repeat-x; */
+}
+ul.topnav li {
+	float: left;
+	margin: 0;
+	padding: 0 10px 0 15px;
+	position: relative; /*--Declare X and Y axis base for sub navigation--*/
+	display: inline;
+}
+ul.topnav li a { 
+	padding: 10px 5px;
+	color: #fff;
+	display: block;
+	text-decoration: none;
+	float: left;
+}
+ul.topnav li a:hover {
+	-moz-border-radius: 3px; /*--CSS3 Rounded Corners--*/
+	-khtml-border-radius: 3px; /*--CSS3 Rounded Corners--*/
+	-webkit-border-radius: 3px; /*--CSS3 Rounded Corners--*/
+}
+/* ul.topnav li span { --Drop down trigger styles--
+	width: 17px;
+	height: 35px;
+	float: left;
+	background: url(../../images/userCenter/subnav_btn.gif) no-repeat center top; 
+} 
+ ul.topnav li span.subhover { --Hover effect for trigger--
+    background-position: center bottom; cursor: pointer;
+}    */
+ul.topnav li ul.subnav {
+	width: 170px;
+	position: absolute; /*--Important - Keeps subnav from affecting main navigation flow--*/
+	left: 0; top: 35px;
+	background: #00a9ba;
+	margin: 0; padding: 0;
+	display: none;
+	float: left;
+	border: 1px solid #00a9ba;
+}
+ul.topnav li ul.subnav li{
+	width: 170px;
+	margin: 0; padding: 0;
+	border-top: 1px solid #00a9ba; /*--Create bevel effect--*/
+	border-bottom: 1px solid #00a9ba; /*--Create bevel effect--*/
+	clear: both;
+}
+/** 导航条选中颜色修改*/
+html ul.topnav li ul.subnav li a {
+	width: 170px;
+	float: left;
+	background-color: #0eb2c2;
+	padding-left: 20px;
+	font-size: 1em; 
+}
+html ul.topnav li ul.subnav li a:hover { /*--Hover effect for subnav links--*/
+	background-color: #00a9ba;
+}
+.topnav a{
+	font-size: 14px;
+}
+.userCenter_span{
+	color:#b9b9b9 ;
+}
+
+.login-out {
+	text-decoration: none;
+	font-size: 12px;
+	font-family: "Microsoft YaHei", Helvetica, Arial, sans-serif; 
+	color: #b9b9b9;
+	height:40px;
+}
+.login-out a:link{ 
+	text-decoration:none;
+}
+.login-out a:visited{ text-decoration:none; } 

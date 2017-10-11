@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="boAuthMapper">
+	<resultMap id="BaseResultMap" type="com.pbms.pojo.BoAuth">
+		<id column="AUTH_ID" property="authId" jdbcType="INTEGER" />
+		<result column="AUTH_NAME" property="authName" jdbcType="VARCHAR" />
+		<result column="AUTH_URL" property="authUrl" jdbcType="VARCHAR" />
+		<result column="AUTH_TYPE" property="authType" jdbcType="CHAR" />
+		<result column="IS_LEAFNODE" property="isLeafNode" jdbcType="CHAR" />
+		<result column="P_ID" property="pId" jdbcType="INTEGER" />
+		<result column="EXTEND1" property="extend1" jdbcType="VARCHAR" />
+		<result column="EXTEND2" property="extend2" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<resultMap id="superResultMap" type="com.pbms.pojo.BoAuth" extends="boAuthMapper.BaseResultMap">
+		<collection column="AUTH_ID" ofType="com.pbms.pojo.BoAuth" property="childrens" javaType="java.util.ArrayList"
+			select="boAuthMapper.selectFks"></collection>
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		AUTH_ID, AUTH_NAME, AUTH_URL, AUTH_TYPE,P_ID,IS_LEAFNODE, EXTEND1, EXTEND2
+	</sql>
+
+	<!-- 根据主键查询实体 -->
+	<select id="get" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from bo_auth auth
+		where auth.AUTH_ID = #{authId,jdbcType=INTEGER}
+	</select>
+
+	<!-- 查询P_ID为空的实体 -->
+	<select id="selects" resultMap="BaseResultMap" useCache="true">
+		select
+		<include refid="Base_Column_List" />
+		from bo_auth auth
+		where auth.P_ID is null
+	</select>
+
+	<!-- 查询P_ID查找实体 -->
+	<select id="selectFks" parameterType="java.lang.Integer" resultMap="superResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from bo_auth auth
+		where auth.P_ID = #{authId,jdbcType=INTEGER}
+	</select>
+
+
+	<!-- 通过_parameter.containsKey('roleName')检查是否存在该值，直接填写key值即可取到map的value值 -->
+	<!-- #{value}方式会自动添加单引号将值当字符串处理，${value}会将值当原始的处理 -->
+	<select id="selectPagination" resultMap="BaseResultMap" parameterType="java.util.Map">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM bo_auth auth
+		<where>
+			<if test="params != null">
+				<!-- AND role.ROLE_NAME LIKE '%#{params}%' -->
+				AND auth.AUTH_NAME LIKE CONCAT('%', CONCAT(#{authName}, '%'))
+			</if>
+		</where>
+		<if test="params != null">
+			ORDER BY auth.${orderColumn} ${orderTurn}
+		</if>
+		<!-- 已在后台RowBounds分页，故无需在此limit -->
+		<!-- LIMIT #{pageNo, jdbcType=INTEGER} , #{pageSize,jdbcType=INTEGER} -->
+
+		<!-- SELECT r.* FROM (SELECT * FROM bo_role role WHERE role.ROLE_NAME LIKE '%员%' LIMIT 1 ,5) r ORDER BY r.ROLE_NAME ASC -->
+	</select>
+
+	<!-- 根据条件查找实体记录数 -->
+	<select id="count" resultType="java.lang.Integer" parameterType="java.util.Map">
+		SELECT COUNT(a.AUTH_NAME) FROM
+		(SELECT auth.AUTH_NAME FROM bo_auth auth
+		<where>
+			<if test="params != null">
+				AND auth.AUTH_NAME LIKE CONCAT('%', CONCAT(#{params}, '%'))
+			</if>
+		</where>
+		) a
+	</select>
+
+	<!-- 查用户角色、权限 -->
+	<!-- <select id="selectPagination" resultMap="BaseResultMap" parameterType="java.util.Map"> SELECT usr.*,role.*,auth.* FROM 
+		bo_user usr,user_role ur,bo_role role,role_auth ra,bo_auth auth WHERE usr.IS_DELETED = '0' AND usr.USER_ID = ur.USER_ID AND 
+		ur.ROLE_ID = role.ROLE_ID AND ra.AUTH_ID = auth.AUTH_ID <if test="userName != null"> AND usr.USER_NAME = #{userName,jdbcType=VARCHAR} 
+		</if> <if test="roleName != null"> AND role.ROLE_NAME = #{roleName,jdbcType=VARCHAR} </if> LIMIT #{pageNo, jdbcType=INTEGER} 
+		, #{pageSize,jdbcType=INTEGER} </select> -->
+
+</mapper>

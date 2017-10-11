@@ -1,0 +1,111 @@
+.power_nav {
+	float: left;
+	width: 180px;
+  border: 1px solid #b60e17;
+  background: #ffffff;
+}
+
+.power_nav h3 {
+	line-height: 40px;
+  height: 40px;
+  text-align: center;
+  background: #d01a27;
+  font-size: 18px;
+  font-weight: 600;
+  color:#ffff00;
+}
+
+
+.power_nav li {
+	line-height: 32px;
+	height: 32px;
+	text-align: center;
+	border-top:solid 1px #b60e17;
+
+}
+
+.power_nav li a{
+	display: block
+}
+.power_nav li a:hover,
+.power_nav li a.current{
+	 color: #ffffff;
+	  background: #ff1e2e;
+} 
+
+
+/* .power_nav li.current,.power_nav li:hover {
+	position: relative
+}
+
+.power_nav li.current em,.power_nav li:hover em {
+	width: 5px;
+	height: 32px;
+	background: #2b7dbc;
+	position: absolute;
+	left: 0;
+	top: 0;
+	display: block
+} */
+
+.power_nav .tu {
+	width: 164px;
+	height: 23px;
+	margin: 10px auto
+}
+
+.power_right {
+	width: 790px;
+	float: right;
+	height: 745px;
+	position: relative
+}
+
+.power_div {
+	height: 100%;
+	border: 1px solid #dadada;
+	overflow: auto;
+	zoom: 1
+}
+
+.power_btn {
+	background: #fafafa;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	padding: 10px 0;
+	text-align: center
+}
+
+.power_btn input {
+	padding: 8px 20px;
+	border: 1px solid #fff;
+	margin: 0 10px;
+	color: #fff;
+	cursor: pointer
+}
+
+.power_btn input.green {
+	background: #4cd964
+}
+
+.power_btn input.green:hover {
+	background: #4ba74b
+}
+
+.power_btn input.red {
+	background: #dd524d
+}
+
+.power_btn input.red:hover {
+	background: #c71717
+}
+
+.power_btn input.blue {
+	background: #007aff
+}
+
+.power_btn input.blue:hover {
+	background: #3006a9
+}

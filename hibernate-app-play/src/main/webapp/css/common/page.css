@@ -1,0 +1,24 @@
+
+/*------------自定义分页器的css--------------*/
+#pagination_pager{position:relative;text-align: center;height: 36px;margin:20px 0 0;clear: both;}
+#pagination_pager .pager{display: inline-block;height: 36px;*max-width: 540px;*margin: 0 auto;_width: expression( Math.max(35, Math.min(540, document.body.offsetWidth*0.99))+"px" );}
+#pagination_pager .pager li { float:left; padding:5px 10px; border:1px solid #dfdfdf;  height:20px;line-height:20px; color:#3d3d3d;margin:0px 2px 0px 2px;background:#fff;}
+#pagination_pager .pager li.button { padding:5px 14px;  display:block; line-height:20px; color:#3d3d3d; background:#fff;border:1px solid #dfdfdf;}
+#pagination_pager .pager li.button:hover {background:#ff6501; color:#fff;cursor:pointer;border-color:#dfdfdf;}
+#pagination_pager .pager li.button:hover a {color:#fff;}
+#pagination_pager .pager li span { font-family:arial; font-size:14px;}
+#pagination_pager .pager li.button a { color:#333; font-family:arial; text-decoration:none;}
+#pagination_pager .pager li.button a:hover { font-size:12px; text-decoration:none;}
+/* .pager li.ch {} */
+#pagination_pager .pager li.button.disable{color:red;}
+#pagination_pager .pager li.button.disable:hover{background:silver;color:#999; cursor:default;}
+#pagination_pager .pager li.blank { padding:0px; cursor:default;}
+#pagination_pager .pager li.select {  background:#ff6501; color:#fff;}
+#pagination_pager .pager li.select a  { color:#fff; font-size:12px;}
+#pagination_pager .pager li .text { width:30px; height:18px; padding:0px; margin:0px; line-height:18px; display:inline; text-align:center; color:#666; font-size:11px;border:0px;}
+
+
+
+
+
+

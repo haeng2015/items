@@ -1,0 +1,28 @@
+*{
+	font-size:12px;margin: 0;padding: 0;
+}
+body {
+    font-family:verdana,helvetica,arial,sans-serif;
+    padding:0;
+    font-size:12px;
+    margin:0;
+}
+h2 {
+    font-size:18px;
+    font-weight:bold;
+    margin:0;
+    margin-bottom:15px;
+}
+.demo-info{
+	padding:0 0 12px 0;
+}
+.demo-tip{
+	display:none;
+}
+ul{list-style:none;}
+a{text-decoration:none;outline: none;}
+a:focus{border:none;outline:0;}
+a:active{border:none;}
+a,a img{border:none;}
+i,em{font-style: normal;}
+.icon{font-family: "icon-fontfamily";}

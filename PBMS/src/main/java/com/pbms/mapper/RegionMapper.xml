@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="boAddressRegino">
+	<resultMap id="BaseResultMap" type="com.pbms.pojo.BoAddressRegion">
+		<id column="RID" property="rId" jdbcType="VARCHAR" />
+		<result column="RNAME" property="rName" jdbcType="VARCHAR" />
+		<result column="RCODE" property="rCode" jdbcType="VARCHAR" />
+		<result column="RTYPE" property="rType" jdbcType="CHAR" />
+
+		<!-- association一对一配置（多对一），collection表示一对多配置，实体中必须有list属性 -->
+		<association property="city" column="CITY" javaType="com.pbms.pojo.BoAddressCity" select="boAddressCity.get">
+		</association>
+
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		RID, RNAME, RCODE,RTYPE,CITY
+	</sql>
+
+	<!-- 根据id查找 -->
+	<select id="get" resultMap="BaseResultMap" parameterType="com.pbms.pojo.BoAddressRegion">
+		select
+		<include refid="Base_Column_List" />
+		from bo_site_region
+		where RID = #{rId,jdbcType=VARCHAR}
+	</select>
+
+	<!-- 根据外键查找（市级id） -->
+	<select id="selectFks" resultMap="BaseResultMap" parameterType="com.pbms.pojo.BoAddressCity">
+		select
+		<include refid="Base_Column_List" />
+		from bo_site_region
+		where CITY = #{cId,jdbcType=VARCHAR}
+	</select>
+
+
+</mapper>

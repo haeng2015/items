@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!-- 接口路径 -->
+<mapper namespace="boRoleMapper">
+
+	<!-- 联查 -->
+	<resultMap id="BaseResultMap" type="com.pbms.pojo.BoRole">
+		<id column="ROLE_ID" property="roleId" jdbcType="INTEGER" />
+		<result column="ROLE_NAME" property="roleName" jdbcType="VARCHAR" />
+		<result column="ROLE_TYPE" property="roleType" jdbcType="CHAR" />
+		<result column="USER_ID" property="userId" jdbcType="INTEGER" />
+		<result column="EXTEND1" property="extend1" jdbcType="VARCHAR" />
+		<result column="EXTEND2" property="extend2" jdbcType="VARCHAR" />
+		<!-- 一对多 -->
+		<collection property="roleAuthList" ofType="com.pbms.pojo.RoleAuth">
+			<id column="ID" property="id" jdbcType="INTEGER" />
+			<!-- auth 一对一配置 -->
+			<association property="auth" javaType="com.pbms.pojo.BoAuth">
+				<id column="AUTH_ID" property="authId" jdbcType="INTEGER" />
+				<result column="P_ID" property="pId" jdbcType="INTEGER" />
+				<result column="AUTH_NAME" property="authName" jdbcType="VARCHAR" />
+				<result column="AUTH_URL" property="authUrl" jdbcType="VARCHAR" />
+				<result column="AUTH_TYPE" property="authType" jdbcType="CHAR" />
+				<result column="IS_LEAFNODE" property="isLeafNode" jdbcType="CHAR" />
+				<result column="EXTEND1" property="extend1" jdbcType="VARCHAR" />
+				<result column="EXTEND2" property="extend2" jdbcType="VARCHAR" />
+
+				<collection column="AUTH_ID" ofType="com.pbms.pojo.BoAuth" property="childrens" javaType="java.util.ArrayList" select="boAuthMapper.selectFks" ></collection>
+			</association>
+		</collection>
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		ROLE_ID , ROLE_NAME, ROLE_TYPE,USER_ID, EXTEND1, EXTEND2
+	</sql>
+
+	<!-- 根据主键查找 -->
+	<select id="get" resultMap="BaseResultMap" parameterType="java.lang.Object">
+		select
+		<include refid="Base_Column_List" />
+		from bo_role
+		where ROLE_ID = #{roleId,jdbcType=INTEGER}
+	</select>
+
+	<!-- 根据主键查找 -->
+	<select id="selectFk" resultMap="BaseResultMap" parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from bo_role
+		where ROLE_TYPE = #{type,jdbcType=VARCHAR}
+	</select>
+
+	<!-- 查询全部实体 -->
+	<select id="selects" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from bo_role
+	</select>
+
+	<!-- 带分页的全部查询(datagrid) -->
+	<!-- 通过_parameter.containsKey('roleName')检查是否存在该值，直接填写key值即可取到map的value值 -->
+	<!-- #{value}方式会自动添加单引号将值当字符串处理，${value}会将值当原始的处理 -->
+	<select id="pageDataGrid" resultMap="BaseResultMap" parameterType="java.util.Map">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM bo_role role
+		<where>
+			<!-- 此两种判断map参数值是否为空的方法无效（取map参数的值不能通过params.key取的，而是直接写key值） -->
+			<!-- <if test="_parameter.containsKey('buildName') != null"> -->
+			<!-- <if test="params != null"> -->
+
+			<if test="roleName != null and roleName !=''">
+				<!-- AND build.BUILD_NAME LIKE CONCAT('%', CONCAT(${buildName}, '%')) -->
+				AND role.ROLE_NAME LIKE '%${roleName}%'
+			</if>
+			<!-- 不显示此二者 -->
+			AND role.ROLE_TYPE = '2'
+		</where>
+		<if test="params != null">
+			ORDER BY role.${orderColumn} ${orderTurn}
+		</if>
+		<!-- 已在后台RowBounds分页，故无需在此limit -->
+		<!-- LIMIT #{pageNo, jdbcType=INTEGER} , #{pageSize,jdbcType=INTEGER} -->
+
+		<!-- SELECT r.* FROM (SELECT * FROM bo_role role WHERE role.ROLE_NAME LIKE '%员%' LIMIT 1 ,5) r ORDER BY r.ROLE_NAME ASC -->
+	</select>
+
+	<!-- 根据条件查找实体记录数 -->
+	<select id="countParam" resultType="java.lang.Integer" parameterType="java.util.Map">
+		SELECT COUNT(r.ROLE_ID) FROM
+		(SELECT role.ROLE_ID FROM bo_role role
+		<where>
+			<if test="roleName != null and roleName !=''">
+				<!-- AND build.BUILD_NAME LIKE CONCAT('%', CONCAT(${buildName}, '%')) -->
+				AND role.ROLE_NAME LIKE '%${roleName}%'
+			</if>
+			<!-- 不显示此二者 -->
+			AND role.ROLE_TYPE = '2'
+		</where>
+		) r
+	</select>
+
+
+	<!-- 带分页的全部查询 -->
+	<!-- 通过_parameter.containsKey('roleName')检查是否存在该值，直接填写key值即可取到map的value值 -->
+	<!-- #{value}方式会自动添加单引号将值当字符串处理，${value}会将值当原始的处理 -->
+	<select id="selectPagination" resultMap="BaseResultMap" parameterType="java.util.Map">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM bo_role role
+		<where>
+			<!-- <if test="_parameter.containsKey('roleName') != null"> -->
+			<if test="params != null">
+				<!-- AND role.ROLE_NAME LIKE '%#{params}%' -->
+				AND role.ROLE_NAME LIKE CONCAT('%', CONCAT(#{roleName}, '%'))
+			</if>
+		</where>
+		<if test="params != null">
+			ORDER BY role.${orderColumn} ${orderTurn}
+		</if>
+		<!-- 已在后台RowBounds分页，故无需在此limit -->
+		<!-- LIMIT #{pageNo, jdbcType=INTEGER} , #{pageSize,jdbcType=INTEGER} -->
+
+		<!-- SELECT r.* FROM (SELECT * FROM bo_role role WHERE role.ROLE_NAME LIKE '%员%' LIMIT 1 ,5) r ORDER BY r.ROLE_NAME ASC -->
+	</select>
+
+	<!-- 根据条件查找实体记录数 -->
+	<select id="count" resultType="java.lang.Integer" parameterType="java.util.Map">
+		SELECT COUNT(r.ROLE_NAME) FROM
+		(SELECT role.ROLE_NAME FROM bo_role role
+		<where>
+			<if test="params != null">
+				AND role.ROLE_NAME LIKE CONCAT('%', CONCAT(#{params}, '%'))
+			</if>
+		</where>
+		) r
+	</select>
+
+	<!-- 根据主键删除对象 -->
+	<delete id="delete" parameterType="java.lang.Integer">
+		delete from bo_role
+		where ROLE_ID = #{roleId,jdbcType=INTEGER}
+	</delete>
+
+	<!-- 选择字段添加对象（成功后返回对象id） -->
+	<insert id="insertSelective" parameterType="com.pbms.pojo.BoRole" keyProperty="roleId" useGeneratedKeys="true">
+		insert into bo_role
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="roleName != null">
+				ROLE_NAME,
+			</if>
+			<if test="roleType != null">
+				ROLE_TYPE,
+			</if>
+			<if test="userId != null">
+				USER_ID,
+			</if>
+			<if test="extend1 != null">
+				EXTEND1,
+			</if>
+			<if test="extend2 != null">
+				EXTEND2,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="roleName != null">
+				#{roleName,jdbcType=VARCHAR},
+			</if>
+			<if test="roleType != null">
+				#{roleType,jdbcType=CHAR},
+			</if>
+			<if test="userId != null">
+				#{userId,jdbcType=INTEGER},
+			</if>
+			<if test="extend1 != null">
+				#{extend1,jdbcType=VARCHAR},
+			</if>
+			<if test="extend2 != null">
+				#{extend2,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+
+
+	<update id="updateByPrimaryKeySelective" parameterType="com.pbms.pojo.BoRole">
+		update bo_role
+		<set>
+			<if test="roleName != null">
+				ROLE_NAME = #{roleName,jdbcType=VARCHAR},
+			</if>
+			<if test="roleType != null">
+				ROLE_TYPE = #{roleType,jdbcType=CHAR},
+			</if>
+			<if test="userId != null">
+				USER_ID = #{userId,jdbcType=INTEGER},
+			</if>
+			<if test="extend1 != null">
+				EXTEND1 = #{extend1,jdbcType=VARCHAR},
+			</if>
+			<if test="extend2 != null">
+				EXTEND2 = #{extend2,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where ROLE_ID = #{roleId,jdbcType=INTEGER}
+	</update>
+
+</mapper>

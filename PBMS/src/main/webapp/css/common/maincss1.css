@@ -1,0 +1,148 @@
+@charset "utf-8";
+/* CSS Document */
+body {
+	background: url(../../images/background.jpg) repeat-x;
+	color: #FFFFFF;
+	font-size: 12px;
+	margin: 0px auto;
+	padding: 0px;
+	text-decoration: none;
+}
+
+body a {
+	color: #FFFFFF;
+	text-decoration: none;
+}
+
+body a:hover {
+	color: #0066FF;
+	text-decoration: none;
+}
+
+#icon {
+	text-indent: -1000px;
+	background: url(../../images/icon.gif) no-repeat;
+	width: 210px;
+	height: 33px;
+	margin-left: 10px;
+	margin-top: 10px;
+	float: left;
+}
+
+#userinfo {
+	clear: right;
+	margin-top: 20px;
+	margin-left: 500px;
+	height: 10px;
+}
+
+#userinfo h5 {
+	float: left;
+	margin: 0px 10px;
+}
+
+#banner {
+	clear: left;
+	background: #0D9EB3;
+	margin-top: 10px;
+	height: 25px;
+	padding-top: 4px;
+	text-align: center;
+}
+
+#banner ul {
+	list-style: none;
+	text-align: center;
+	margin: 0px auto;
+	margin-left: 10px;
+	padding: 0px;
+	height: 10px;
+}
+
+#banner ul li {
+	float: left;
+	padding: 0px 10px;
+	margin: 0px auto;
+	border-right: 1px #FFFFFF solid;
+	height: 12px;
+	display: block;
+}
+
+#banner h5 {
+	margin: 0px;
+	padding: 0px;
+}
+
+.bannerli {
+	position: relative;
+	font-size: 20px;
+}
+
+.bannerchild {
+	position: absolute;
+	top: 20px;
+	left: 0px;
+	border: none;
+	width: 250px;
+	display: none;
+}
+
+.showTable {
+	position: absolute;
+	top: 25px;
+	left: 10px;
+	border: none;
+	width: 600px;
+	display: block;
+	font-size: 15px;
+}
+
+.bannerchild li {
+	float: left;
+	border: none;
+}
+
+#main {
+	clear: both;
+	background: #FFFFFF url(../../images/main.jpg) no-repeat bottom right;
+	border: 1px #666666 solid;
+	margin: 20px auto;
+	width: 80%;
+	height: 440px;
+}
+
+#foot {
+	clear: both;
+	width: 100%;
+	margin: 0px auto;
+	text-align: center;
+}
+
+#foot ul {
+	list-style: none;
+}
+
+#foot ul li {
+	float: left;
+	margin: 0px auto;
+	padding: 0px 20px;
+	border-right: #FFFFFF 1px solid;
+	font-size: 15px;
+}
+
+#foot ul li a {
+	color: #FFFFFF;
+	font-weight: bold;
+}
+
+#foot ul li a:hover {
+	color: #0066FF;
+}
+
+.lightup {
+	background: #D1F8DE;
+}
+
+.lightdown {
+	background: #FFFFFF;
+}

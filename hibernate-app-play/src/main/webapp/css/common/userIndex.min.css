@@ -1,0 +1,334 @@
+﻿pre {
+	white-space: pre-wrap !important;
+	word-wrap: break-word !important;
+	*white-space: normal !important
+}
+
+.floatleft {
+	float: left
+}
+
+.floatright {
+	float: right
+}
+
+.clear {
+	clear: both
+}
+
+.overflowHidden {
+	overflow: hidden;
+	-moz-text-overflow: ellipsis;
+	text-overflow: ellipsis;
+	white-space: nowrap
+}
+
+.overflowHidden1 {
+	overflow: hidden
+}
+
+.overflowAuto {
+	overflow: auto;
+	zoom: 1
+}
+
+.textLeft {
+	text-align: left
+}
+
+.textCenter {
+	text-align: center
+}
+
+.textRight {
+	text-align: right
+}
+
+.marginCenter {
+	margin: 0 auto
+}
+
+.W_word {
+	font-family: Microsoft YaHei
+}
+
+* {
+	padding: 0;
+	margin: 0
+}
+
+ul {
+	list-style: none
+}
+
+i,em {
+	font-style: normal
+}
+
+a,img {
+	border: none
+}
+
+a {
+	text-decoration: none;
+	color: #1e1e1e;
+	cursor: pointer
+}
+
+a:hover {
+	color: #39b6fe
+}
+
+.icon {
+	font-family: "icon-fontfamily"
+}
+
+input,textarea {
+	outline: none
+}
+
+.BigDiv {
+	width: 1024px;
+	margin: 0 auto;
+	overflow: hidden
+}
+
+body {
+	font-family: tahoma, arial, 'Hiragino Sans GB', "����", sans-serif;
+	font-size: 12px;
+	color: #333;
+	background: #fafafa
+}
+
+h1 {
+	font: bold 22px/35px "����";
+	color: #333
+}
+
+h3 {
+	font: bold 14px/1.5 "����"
+}
+
+.White_box {
+	width: 980px;
+	margin: 20px auto;
+	overflow: hidden;
+}
+
+.grey {
+	color: #999
+}
+
+.blue {
+	color: #1d94d1
+}
+
+.green {
+	color: #44b548
+}
+
+.main_box {
+	width: 980px;
+	overflow: auto;
+	zoom: 1;
+	padding: 4px 0px 10px
+}
+
+.nav_left {
+	width: 210px;
+	float: left
+}
+
+.info_box {
+	overflow: auto;
+	zoom: 1;
+	background: #fff;
+	padding: 10px 0 20px;
+	border: 1px solid #d6d7dc;
+	border-bottom: 1px dashed #d6d7dc;
+	/* -moz-box-shadow: 2px 2px 10px #dadada;
+	-webkit-box-shadow: 2px 2px 10px #dadada;
+	box-shadow: 2px 2px 10px #dadada */
+}
+
+.info_box .info_pic {
+	margin: 0 auto
+}
+
+.info_box .info_pic {
+	border: 2px solid #d6d7dc;
+}
+
+.info_box .info_pic,.info_box .info_pic img {
+	width: 110px;
+	height: 110px;
+	border-radius: 60px
+}
+
+.info_box .info_word {
+	margin-top: 10px
+}
+
+.info_box .info_word p {
+	width: 200px;
+	line-height: 22px;
+	word-wrap: break-word;
+	text-align: center;
+	margin: 0 auto
+}
+
+.info_box .info_word p b.tit {
+	font-size: 16px;
+	color: #39b6fe
+}
+
+.info_box .info_word p b {
+	font-size: 14px
+}
+
+.info_box .info_btn {
+	width: 90px;
+	height: 24px;
+	line-height: 22px;
+	margin: 10px auto 0;
+	clear: both;
+	border: 1px solid #ff8226;
+	border-radius: 5px;
+	text-align: center
+}
+
+.info_box .info_btn a {
+	display: block;
+	color: #ff8226;
+}
+
+.info_box .info_btn:hover {
+	background: #ff8226;
+}
+
+.info_box .info_btn:hover a {
+	color: #fff
+}
+
+.date_div {
+	width: 208px;
+	padding: 20px 0;
+	background:#fff;
+	border: 1px solid #d6d7dc;
+	border-top:none;
+	/* -moz-box-shadow: 2px 2px 10px #dadada;
+	-webkit-box-shadow: 2px 2px 10px #dadada;
+	box-shadow: 2px 2px 10px #dadada */
+}
+
+.date_current {
+	text-align: center;
+	font-size: 14px;
+	color: #086ba5
+}
+
+.date_div #date_id {
+	width: 186px;
+	margin: 10px auto 0
+}
+
+.time_current {
+	text-align: center;
+	line-height: 22px;
+	font-size: 14px
+}
+
+.week_current {
+	text-align: center;
+	line-height: 22px;
+	font-size: 14px
+}
+
+.code_div {
+	font-family: Microsoft YaHei;
+	text-align: center;
+	padding: 20px 0;
+	-moz-box-shadow: 2px 2px 10px #dadada;
+	-webkit-box-shadow: 2px 2px 10px #dadada;
+	box-shadow: 2px 2px 10px #dadada
+}
+
+.code_div p {
+	font-size: 16px;
+	line-height: 32px
+}
+
+.code_div img {
+	width: 110px;
+	height: 110px
+}
+
+.right_div {
+	width: 750px;
+	float: right;
+	border:solid 1px #d6d7dc;
+	background: #fff;
+	
+}
+
+.card_box {
+	background: #fff;
+	margin-bottom: 10px
+}
+
+.card_box .card_top {
+	height: 32px;
+	line-height: 32px;
+	border-bottom: 1px dashed #ececef
+}
+
+.card_box .card_top b {
+	margin-left: 20px;
+	border-left: 5px solid #ff8a00;
+	padding-left: 10px;
+	color: #ff8226;
+	font-size: 16px;
+	font-family: Microsoft YaHei
+}
+
+.card_box .card_div {
+	padding: 10px 0;
+	overflow: auto;
+	zoom: 1
+}
+
+.card_box .card_div ul.info_ul li {
+	float: left;
+	width: 346px;
+	height: 32px;
+	line-height: 32px;
+	margin-left: 20px;
+	font-size: 16px;
+	color: #424242
+}
+
+.card_box .card_div ul.info_ul li span {
+	color: #848484
+}
+
+.card_box .card_div ul.info_ul li em {
+	color: #ff8a00
+}
+
+.card_div .tuijian {
+	padding: 10px
+}
+
+.card_div .tuijian p {
+	line-height: 30px;
+	font-size: 15px;
+	font-family: Microsoft YaHei;
+	margin: 0 20px;
+	text-indent: 2em
+}
+
+.card_div .tuijian img {
+	width: 686px;
+	display: block;
+	margin:0 auto;
+}

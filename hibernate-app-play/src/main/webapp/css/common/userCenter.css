@@ -1,0 +1,294 @@
+html,body{
+    margin:0px;
+    padding:0px;
+    height:100%;
+}
+body {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.42857143;
+  /* color: #fafafa; */
+  background-color: #fafafa;
+}
+
+.userCenter-iframe{
+	vertical-align:bottom; 
+	display:block;
+	margin-bottom: -5px;
+}
+
+div{
+	margin:0px auto;
+    padding:0px;
+}
+.btn-primary {
+  color: #fff;
+  background-color: #f9c26f;
+  border-color: #2e6da4;
+}
+
+.header-wx{
+	
+	margin-bottom: 20px;
+	padding: 9px;
+	margin-bottom: 20px;
+	background-color: #f5f5f5;
+	border: 1px solid #e3e3e3;
+	border-radius: 4px;
+	-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .05);
+	        box-shadow: inset 0 1px 1px rgba(0, 0, 0, .05);
+}
+
+.header-pair{
+	background-color: #f5f5f5; 
+	height: 45px;
+}
+#header-pair{
+	background-color: #f5f5f5; 
+	height: 45px;
+	margin-bottom: 9px;
+	padding: 9px;
+	margin-bottom: 20px;
+	background-color: #f5f5f5;
+	border: 1px solid #e3e3e3;
+	border-radius: 4px;
+	-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .05);
+	        box-shadow: inset 0 1px 1px rgba(0, 0, 0, .05);
+}
+#header-nva {
+	min-height:35px;
+	width:100%;
+	padding:0px;
+	background-color:#92C5EB;
+	overflow:hidden;
+}
+#user-top {
+	width:90px;
+	background-image:url(../../images/userCenter/center-background04.jpg);
+	/*--去边框--*/
+	background-color: Transparent; 
+	border-style :none;
+}
+/*-- 导航栏的排版格式 --*/
+#headerTable{
+	margin:0px auto;
+	height:100%;
+}
+
+
+html,body {
+    margin:0px auto;
+    padding:0px;
+    height:100%;
+	font-size:12px;
+}
+.container-fluid{
+	width:100%;
+	height:100%;
+	min-width:800px;
+	min-height:600px;
+}
+
+#header {
+	height:10%;
+	min-height:65px;
+	width:100%;
+	padding:0px;
+	overflow:hidden;
+	background-color: #fafafa;
+}
+#body {
+	height:80%;
+	min-height:470px;
+	width:100%;
+	text-align:center;
+	padding:50px;
+}
+#foot {
+	height:10%;
+	min-height:-65px;
+	width:100%;
+	background-color:#00a9ba;
+}
+/*-- 导航栏的排版格式 --*/
+#navTable{
+	margin:0px auto;
+	height:100%;
+}
+.guanyuwomen{
+	font-size:12px;
+	line-height:17px; 
+	float: left; 
+	text-align: right;
+	padding-top: 12px;
+}
+#panasignLog{
+	width:200px;
+}
+
+.navMenu{
+	width:80px;
+}
+
+.navMenu button{
+	text-decoration:none;
+	color:white;
+	font-size:15px;
+}
+
+.navMenu button:hover{
+	text-decoration:none;
+	color:orange;
+}
+
+/*-- 页脚的排版格式 --*/
+#footTable{
+	margin:0px auto;
+	height:100%;
+}
+
+#footTable tr td{
+	width:250px;
+	color:white;
+	text-align:center;
+}
+
+#footTable a{
+	text-decoration:none;
+	color:white;
+	font-size:13px;
+}
+
+#footTable button{
+	height:38px;
+	text-decoration:none;
+	color:white;
+	font-size:13px;
+}
+
+#weibo{
+	width:39px;
+	background-image:url(../../images/panasignLogin/weibo.png);
+	/*--去边框--*/
+	background-color: Transparent; 
+	border-style :none;
+}
+#renren{
+	width:39px;
+	background-image:url(../../images/panasignLogin/renren.png);
+	/*--去边框--*/
+	background-color: Transparent; 
+	border-style :none;
+}
+#weixin{
+	width:37px;
+	background-image:url(../../images/panasignLogin/weixin.png);
+	/*--去边框--*/
+	background-color: Transparent; 
+	border-style :none;
+}
+
+#guanzhuwomen{
+	width:90px;
+	background-image:url(../../images/panasignLogin/guanzhuwomen.png);
+	/*--去边框--*/
+	background-color: Transparent; 
+	border-style :none;
+}
+#guanzhuwomen:hover{
+	cursor:auto;
+}
+
+ 
+/*-- 中间登录部分的排版格式 --*/
+#loginForm{
+	margin:auto auto auto auto;
+	width:450px;
+	height:400px;
+	padding:50px;
+}
+
+#loginTable{
+	width:100%;
+	height:100%;
+}
+.one .input-group{
+	height:40px;
+	width:300px;
+	margin:auto;
+	border-radius: 5px;
+	border:1px solid #92C5EB;
+}
+.one .input-group input{
+	height:40px; 
+	border:1px solid #92C5EB;
+}
+
+.one .input-group i{
+	background-color:white;
+	border:1px solid #92C5EB;
+}
+
+.two{
+	padding:0px;
+	text-align:left;
+}
+
+.two .input-group{
+	height:40px;
+	width:210px;
+	margin:auto;
+	border-radius: 5px;
+	border:1px solid #92C5EB;
+}
+
+.two .input-group input{
+	height:40px; 
+	border:1px solid #92C5EB;
+}
+
+.two .input-group i{
+	background-color:white;
+	border:1px solid #92C5EB;
+}
+
+#codeImgTd{
+	text-align:left;
+}
+
+#codeImgTd img{	
+	width:65px;
+	height:40px;
+}
+
+#loginButton{
+	height:40px;
+	width:300px;
+	background-color:#92C5EB;
+	border:1px solid blue;
+	border-radius: 5px;
+	color:white;
+}
+
+#welcome{
+	font-size:14px;
+	padding-left:30px;
+	text-align:left;
+	color:#666;
+}
+
+.checkbox input{
+	border:1px solid red;
+}
+
+.login-out {
+	text-decoration: none;
+	font-size: 14px;
+	font-family: "Microsoft YaHei", Helvetica, Arial, sans-serif; 
+	color: #fff;
+	height:40px;
+}
+.login-out a:link{ 
+	text-decoration:none;
+}
+.login-out a:visited{ text-decoration:none; } 

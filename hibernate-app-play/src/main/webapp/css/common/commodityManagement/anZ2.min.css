@@ -1,0 +1,646 @@
+﻿pre {
+	white-space: pre-wrap !important;
+	word-wrap: break-word !important;
+	*white-space: normal !important
+}
+
+.floatleft {
+	float: left
+}
+
+.floatright {
+	float: right
+}
+
+.clear {
+	clear: both
+}
+
+.overflowHidden {
+	overflow: hidden;
+	-moz-text-overflow: ellipsis;
+	text-overflow: ellipsis;
+	white-space: nowrap
+}
+
+.overflowHidden1 {
+	overflow: hidden
+}
+
+.overflowAuto {
+	overflow: auto;
+	zoom: 1
+}
+
+.textLeft {
+	text-align: left
+}
+
+.textCenter {
+	text-align: center
+}
+
+.textRight {
+	text-align: right
+}
+
+.marginCenter {
+	margin: 0 auto
+}
+
+.W_word {
+	font-family: Microsoft YaHei
+}
+
+* {
+	padding: 0;
+	margin: 0
+}
+
+ul {
+	list-style: none
+}
+
+i,em {
+	font-style: normal
+}
+
+a,img {
+	border: none
+}
+
+a {
+	text-decoration: none;
+	color: #1e1e1e;
+	cursor: pointer
+}
+
+a:hover {
+	color: #456ec8
+}
+
+.icon {
+	font-family: "icon-fontfamily"
+}
+
+input,textarea {
+	outline: none
+}
+
+.BigDiv {
+	width: 1024px;
+	margin: 0 auto;
+	overflow: hidden
+}
+
+body {
+	font-family: tahoma, arial, 'Hiragino Sans GB', "����", sans-serif;
+	font-size: 12px;
+	color: #333;
+	background: #fafafa
+}
+
+h1 {
+	font: bold 22px/35px "����";
+	color: #333
+}
+
+h3 {
+	font: bold 14px/1.5 "����"
+}
+
+.bgO {
+	width: 100%;
+	height: 2px;
+	background: #ff921e
+}
+
+.border_box {
+	border: 1px solid #dadada;
+	margin-top: 10px
+}
+
+.blue_top {
+	height: 32px;
+	line-height: 32px;
+	border-bottom: 2px solid #456ec8;
+	margin: 0 10px
+}
+
+.blue_top h3 {
+	line-height: 32px;
+	font-size: 14px
+}
+
+.orange {
+	color: #ff921e
+}
+
+.red {
+	color: #f00
+}
+
+.grey {
+	color: #525252
+}
+
+.blue {
+	color: #456ec8
+}
+
+.ellipsis-2 {
+	display: -webkit-box;
+	overflow: hidden;
+	white-space: normal !important;
+	text-overflow: ellipsis;
+	word-wrap: break-word;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical
+}
+
+
+.list_top span {
+	margin-right: 20px
+}
+
+.list_top input {
+	padding: 2px
+}
+
+.list_top select {
+	padding: 2px
+}
+
+.list_top .add_txt {
+	width: 260px
+}
+
+.list_top .txt {
+	width: 150px
+}
+
+.table_list {
+	margin: 0 10px 10px
+}
+
+.table_list table {
+	width: 100%
+}
+
+
+.table_list table tr th,.table_list table tr td {
+	text-align: center
+}
+
+.table_list table tr th {
+	padding: 0 4px
+}
+
+.table_list table .th_input {
+	width: 48px
+}
+
+.table_list table .th_all {
+	width: 350px;
+	text-align: left
+}
+
+.table_list table .th_num {
+	width: 200px
+}
+
+.table_list table .th_model {
+	width: 275px
+}
+
+.table_list table .th_time {
+	width: 124px
+}
+
+.table_list table th {
+	line-height: 32px;
+	font-weight: 100
+}
+
+.table_list table td {
+	padding: 4px
+}
+
+.table_list table td .pic {
+	width: 50px;
+	height: 50px;
+	float: left;
+	margin-right: 10px
+}
+
+.table_list table td .pic img {
+	width: 50px;
+	height: 50px;
+	display: block
+}
+
+.table_list table td .zi {
+	line-height: 20px
+}
+
+
+
+.content .btn_div a {
+	padding: 6px 20px;
+	background: #39b6fe;
+	margin: 0 10px;
+	color: #fff;
+	border-radius: 2px;
+	font-size: 14px
+}
+
+.content .btn_div a:hover {
+	background: #456ec8
+}
+﻿pre {
+	white-space: pre-wrap !important;
+	word-wrap: break-word !important;
+	*white-space: normal !important
+}
+
+.floatleft {
+	float: left
+}
+
+.floatright {
+	float: right
+}
+
+.clear {
+	clear: both
+}
+
+.overflowHidden {
+	overflow: hidden;
+	-moz-text-overflow: ellipsis;
+	text-overflow: ellipsis;
+	white-space: nowrap
+}
+
+.overflowHidden1 {
+	overflow: hidden
+}
+
+.overflowAuto {
+	overflow: auto;
+	zoom: 1
+}
+
+.textLeft {
+	text-align: left
+}
+
+.textCenter {
+	text-align: center
+}
+
+.textRight {
+	text-align: right
+}
+
+.marginCenter {
+	margin: 0 auto
+}
+
+.W_word {
+	font-family: Microsoft YaHei
+}
+
+* {
+	padding: 0;
+	margin: 0
+}
+
+ul {
+	list-style: none
+}
+
+i,em {
+	font-style: normal
+}
+
+a,img {
+	border: none
+}
+
+a {
+	text-decoration: none;
+	color: #1e1e1e;
+	cursor: pointer
+}
+
+a:hover {
+	color: #456ec8
+}
+
+.icon {
+	font-family: "icon-fontfamily"
+}
+
+input,textarea {
+	outline: none
+}
+
+.BigDiv {
+	width: 1024px;
+	margin: 0 auto;
+	overflow: hidden
+}
+
+body {
+	font-family: tahoma, arial, 'Hiragino Sans GB', "����", sans-serif;
+	font-size: 12px;
+	color: #333;
+	background: #fafafa
+}
+
+h1 {
+	font: bold 22px/35px "����";
+	color: #333
+}
+
+h3 {
+	font: bold 14px/1.5 "����"
+}
+
+.bgO {
+	width: 100%;
+	height: 2px;
+	background: #ff921e
+}
+
+.border_box {
+	border: 1px solid #dadada;
+	margin-top: 10px
+}
+
+.blue_top {
+	height: 32px;
+	line-height: 32px;
+	border-bottom: 2px solid #456ec8;
+	margin: 0 10px
+}
+
+.blue_top h3 {
+	line-height: 32px;
+	font-size: 14px
+}
+
+.orange {
+	color: #ff921e
+}
+
+.red {
+	color: #f00
+}
+
+.grey {
+	color: #525252
+}
+
+.blue {
+	color: #456ec8
+}
+
+.ellipsis-2 {
+	display: -webkit-box;
+	overflow: hidden;
+	white-space: normal !important;
+	text-overflow: ellipsis;
+	word-wrap: break-word;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical
+}
+
+.content {
+	overflow: hidden;
+}
+.left_nav {
+  width: 158px;
+  float: left;
+  border: 1px solid #b60e17;
+  background: #ffffff;
+}
+.left_nav h2{
+  line-height: 40px;
+  height: 40px;
+  text-align: center;
+  background: #d01a27;
+  font-size: 18px;
+  font-weight: 600;
+  color:#ffff00;
+  margin:0;
+}
+.left_nav h3 {
+  line-height: 40px;
+  height: 40px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 600;
+  color:#333333;
+  cursor:pointer;
+  border-top: 1px solid #b60e17;
+}
+.left_nav h3:hover,
+.left_nav h3.current{
+  color:#d01a27;
+}
+.left_nav h3 .icon {
+  font-size: 18px;
+}
+.left_nav h3 span {
+  color: #333333;
+  margin-right: 10px;
+}
+
+.left_nav h3 i {
+	margin-left: 10px
+}
+
+.left_nav ul {
+	text-align: center;
+	font-size: 14px
+}
+
+.left_nav ul li {
+	line-height: 32px;
+	height: 32px;
+	vertical-align: middle;
+	  border-top: 1px solid #b60e17;
+}
+
+.left_nav ul li a {
+	display: block
+}
+
+.left_nav ul li:hover,.left_nav ul li.cur {
+	background: #ff1e2e;
+}
+
+.left_nav ul li:hover a,.left_nav ul li.cur a {
+	color: #fff
+}
+
+.right_div {
+	width: 812px;
+	float: right;
+	background: #f1f1f1;
+}
+.right_div p.sJ{
+	width:810px;
+	background:#fbeeef;
+	border:solid 1px #ffdee1;
+	text-align:left;
+	padding:7px 0;
+}
+.right_div p.sJ span{
+	margin:0 20px 0 14px;
+}
+.list_top {
+	height:32px;
+	padding:0 10px;
+	border-bottom: 2px solid #d01a27;
+	overflow:hiddden;
+}
+.list_top h3{
+	float:left;
+	line-height: 32px;
+    font-size: 14px;
+}
+.list_top a .icon {
+    font-size: 26px;
+    color: #adadad;
+    cursor: pointer;
+    margin-right: 4px;
+}
+.list_top a .icon:hover{
+	color:#333333;
+}
+/* .list_top span {
+	margin-right: 20px
+}
+ */
+/* .list_top input {
+	padding: 2px
+}
+ */
+.list_top select {
+	padding: 2px
+}
+
+.list_top .add_txt {
+	width: 260px
+}
+
+.list_top .txt {
+	width: 150px
+}
+
+.table_list {
+	min-height:300px;
+	margin: 0 0 10px;
+}
+
+.table_list table {
+	width: 812px;
+}
+
+.table_list table tr {
+	display: block;
+	margin-bottom: 4px;
+
+}
+.table_list table tr.bt_div{
+	background:#fafafa;
+	margin:0;
+}
+.table_list table tr th,.table_list table tr td {
+	text-align: center
+}
+
+.table_list table tr th {
+	padding: 0 4px
+}
+
+.table_list table .th_input {
+	width: 48px
+}
+
+.table_list table .th_all {
+	width: 440px;
+	text-align: left
+}
+
+.table_list table .th_num {
+	width: 200px
+}
+
+.table_list table .th_model {
+	width: 190px
+}
+
+.table_list table .th_time {
+	width: 124px
+}
+
+.table_list table th {
+	line-height: 32px;
+	font-weight: 100
+}
+
+.table_list table td {
+	padding: 4px
+}
+
+.table_list table td .pic {
+	width: 50px;
+	height: 50px;
+	float: left;
+	margin-right: 10px
+}
+
+.table_list table td .pic img {
+	width: 50px;
+	height: 50px;
+	display: block
+}
+
+.table_list table td .zi {
+	line-height: 20px
+}
+
+.content .btn_div {
+
+	width: 812px;
+	background: #f1f1f1;
+	height: 40px;
+	text-align: center;
+	line-height: 40px
+}
+
+.content .btn_div a {
+	padding: 6px 20px;
+	background: #ff1e2e;
+	margin: 0 10px;
+	color: #fff;
+	border-radius: 2px;
+	font-size: 14px
+}
+
+.content .btn_div a:hover {
+	background: #d01a27;
+}
+
+
+.table_list table td.dd_sj{
+	padding:0;
+}
+.right_div .tb{
+	margin:10px;
+}
+

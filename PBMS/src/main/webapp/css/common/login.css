@@ -1,0 +1,143 @@
+body {
+	text-align: center;
+	background: url(../../images/background.jpg) repeat-x;
+	margin: 0px auto;
+}
+
+#top {
+	background: url(../../images/login_top.jpg);
+	margin: 40px auto;
+	width: 700px;
+	height: 79px;
+}
+
+#preview {
+	width: 260px;
+	height: 190px;
+	border: 1px solid #000;
+	overflow: hidden;
+}
+
+#imghead {
+	filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=image);
+}
+
+#main {
+	margin: 20px auto;
+	height: 0px auto;
+}
+
+#image table {
+	margin: 40px auto;
+	text-align: center;
+}
+
+#image td {
+	border: none;
+	text-align: center;
+	padding: 0px 70px;
+}
+
+.style1 {
+	background: url(../../images/login_1.jpg) no-repeat top bottom;
+	width: 244px;
+	height: 188px;
+}
+
+.style1down {
+	background: url(../../images/login_1_down.jpg) no-repeat top left;
+	width: 244px;
+	height: 188px;
+}
+
+.style2 {
+	background: url(../../images/login_2.jpg) no-repeat top left;
+	width: 244px;
+	height: 188px;
+}
+
+.style2down {
+	background: url(../../images/login_2_down.jpg) no-repeat top left;
+	width: 244px;
+	height: 188px;
+}
+
+#login table {
+	margin: 40px auto;
+	text-align: center;
+}
+
+#login td {
+	border: none;
+	text-align: center;
+	padding: 10px 20px;
+}
+
+#loginname {
+	background: url(../../images/login_loginname.jpg) no-repeat top left;
+	width: 112px;
+	height: 23px;
+}
+
+#password {
+	background: url(../../images/login_password.jpg) no-repeat top left;
+	width: 112px;
+	height: 20px;
+}
+
+.loginbutton {
+	background: url(../../images/login_login5.jpg) no-repeat top left;
+	width: 80px;
+	height: 20px;
+	border: none;
+	margin-right: 20px;
+}
+
+.forgetButton{
+	border-color: pink;
+	color: red;
+}
+
+.loginbuttondown {
+	background: url(../../images/login_login_down.jpg) no-repeat top left;
+	width: 80px;
+	height: 20px;
+	border: none;
+	margin-right: 20px;
+}
+
+.loginbuttonover {
+	background: url(../../images/login_login_over.jpg) no-repeat top left;
+	width: 80px;
+	height: 20px;
+	border: none;
+	margin-right: 20px;
+}
+
+.registerbutton {
+	background: url(../../images/login_register.jpg) no-repeat top left;
+	width: 80px;
+	height: 20px;
+	border: none;
+	margin-left: 20px;
+}
+
+.registerbuttondown {
+	background: url(../../images/login_register_down.jpg) no-repeat top left;
+	width: 80px;
+	height: 20px;
+	border: none;
+	margin-left: 20px;
+}
+
+.registerbuttonover {
+	background: url(../../images/login_register_over.jpg) no-repeat top left;
+	width: 80px;
+	height: 20px;
+	border: none;
+	margin-left: 20px;
+}
+
+.textin {
+	width: 140px;
+}

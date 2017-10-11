@@ -1,0 +1,106 @@
+﻿
+.floatleft{float:left;}
+
+/*头部*/
+.panel-header .panel-title{ color:#fff; text-align:center; height:32px; line-height:32px;}
+.layout-panel-west .panel-header .panel-title{background:#ff8a00;}
+.layout-panel-center .panel-header .panel-title{background:#ff8a00;}
+
+/*内容头部*/
+.layout-panel-center{padding-left:10px;}
+
+/*搜索*/
+.tb{padding:5px 0 0;}
+.tb input{width:150px;}
+.tb .l-btn{background:#ededed; border:1px solid #d8d8d8; color:#555; padding:0 5px;}
+.tb .l-btn:hover{background:#fe8c12;color:#fff;}
+.panel.datagrid{margin-top:5px;}
+
+/*tab头部*/
+.tabs-panels{border:none;}
+
+/*文字多出隐藏*/
+.datagrid-cell{overflow:hidden;-moz-text-overflow:ellipsis;text-overflow:ellipsis;white-space:nowrap;}
+/*操作小图标*/
+.datagrid-cell-c1-operation{}
+div[class *= "datagrid-cell-"] a{margin:0 4px; cursor:pointer; color:#FFC281;}
+div[class *= "datagrid-cell-"] a.grey{ color:#D3D3D3;}
+div[class *= "datagrid-cell-"] a.grey:hover{ color:#D3D3D3;}
+div[class *= "datagrid-cell-"] a:hover{color:#fe8c12;}
+div[class *= "datagrid-cell-"] .icon{font-size:16px;}
+
+/*表格样式*/
+.datagrid-header{border-color:#1e1e1e; background:none;}
+.datagrid-header td{border:none; text-align:center;}
+.datagrid-header td.datagrid-header-over{background:none;}
+.datagrid-body td{border-width: 0 0 1px 0;}
+
+
+.form_div{background:#fff;}
+.detail_tit{height:32px; line-height:32px; font-size:18px;}
+.detail_tit h3{font-size:18px; color:#343434; float:left;}
+.detail_tit i.icon{font-size:26px; float:right; color:#adadad; cursor:pointer; margin-right:4px;}
+.detail_tit h4{font-weight:100; line-height:30px; font-size:16px; border-bottom:1px solid #ff921e; margin:20px 0 10px;}
+.detail_tit em.icon{font-size:18px; margin-right:10px;}
+.detail_table{width:100%;border-width:1px 0 0 1px; border-style:solid; border-color:#dadada;}
+.detail_table tr{line-height:22px;}
+.detail_table th{padding:5px 4px;font-size:14px; border-width:0 1px 1px 0; border-style:solid; border-color:#dadada;}
+.detail_table td{padding:5px 4px; border-width:0 1px 1px 0; border-style:solid; border-color:#dadada;}
+.detail_table tr.evenClass{background:#f7f7f7;}
+.detail_table input.txts{width:70%;}
+.detail_table input.txt{width:20%;}
+.detail_table input.btn{width:120px; padding:7px; color:#fff; background:#39b6fe; border:none; cursor:pointer;}
+.detail_table select{min-width:20%;}
+
+.combo-panel{background:#ededed;border: 1px solid #7ACBF5;}
+
+
+a.btn{width:120px; display:block; text-align:center; padding:7px; color:#fff; background:#39b6fe; border:none; cursor:pointer; margin:10px auto;}
+a.btn:hover{color:blue; }
+.btn_div{text-align:center; margin:10px auto;}
+a.btn_a{width:120px; text-align:center; padding:7px; margin:0 10px; color:#fff; background:#39b6fe; border:none; cursor:pointer;}
+a.btn_a:hover{color:blue; }
+
+span.lable{margin:0 10px 0 0; padding:2px 6px;}
+span.lable a{color:#555555;}
+span.lable:hover{background:#39b6fe;}
+span.lable:hover a{color:#fff;}
+span.lable.current{background:#39b6fe;}
+span.lable.current a{color:#fff;}
+.textbox .textbox-text{color:#555555;}
+
+.overflowAuto{overflow:auto;}
+
+
+.classify_box .tb{margin:2px 0; padding:5px 5px 6px; border-bottom:1px dashed #dadada;overflow:auto;}
+.tb input.btn{width:100px; padding:7px; color:#fff; background:#39b6fe; border:none; cursor:pointer; float:right;}
+.classify_box .classify_div{display:none;}
+
+.more_btn{float:right;background: #ededed; border: 1px solid #d8d8d8; color: #555; padding:4px 6px; font-size:12px; cursor:pointer;}
+
+
+.back_i{font-size:26px; float:right; color:#adadad; cursor:pointer; margin-right:4px;}
+
+.dlg_form{width:100%;}
+.dlg_form th{padding:4px; font-size:14px; font-weight:100; text-align:right;}
+.dlg_form td{padding:4px;}
+.dlg_form input.btn{width:100px; padding:7px; color:#fff; background:#39b6fe; border:none; cursor:pointer;filter:chroma(color=#000000);}
+
+.bor_t{border-top:2px solid #ff8a00;}
+
+.block_box .block_div{display:none;}
+
+.layout-panel-center .tb{padding:3px 0;}
+
+
+.bgC{background:#fe8c12 !important; color:#fff !important;}
+.red{color:red;}
+
+
+.dialog_div{width:400px; padding:0 0 10px; position:absolute;top:20%; left:50%; margin-left:-200px; z-index:99999; background:#fff;}
+.black_divbg{width:100%; background:url(images/black_bg.png); position:fixed; top:0; left:0; z-index:9999;}
+.dialog_div h3{text-align:center; line-height:32px; height:32px; background:#39b6fe; color:#fff;font-size:14px; margin-bottom:10px;}
+
+.export_excel{margin-right: 5px;float: right;}
+
+.panel,.window{z-index:999999 !important;}

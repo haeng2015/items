@@ -1,0 +1,152 @@
+﻿pre {
+	white-space: pre-wrap !important;
+	word-wrap: break-word !important;
+	*white-space: normal !important
+}
+
+.floatleft {
+	float: left
+}
+
+.floatright {
+	float: right
+}
+
+.clear {
+	clear: both
+}
+
+.overflowHidden {
+	overflow: hidden;
+	-moz-text-overflow: ellipsis;
+	text-overflow: ellipsis;
+	white-space: nowrap
+}
+
+.overflowHidden1 {
+	overflow: hidden
+}
+
+.overflowAuto {
+	overflow: auto;
+	zoom: 1
+}
+
+.textLeft {
+	text-align: left
+}
+
+.textCenter {
+	text-align: center
+}
+
+.textRight {
+	text-align: right
+}
+
+.marginCenter {
+	margin: 0 auto
+}
+
+.W_word {
+	font-family: Microsoft YaHei
+}
+
+* {
+	padding: 0;
+	margin: 0
+}
+
+ul {
+	list-style: none
+}
+
+i,em {
+	font-style: normal
+}
+
+a,img {
+	border: none
+}
+
+a {
+	text-decoration: none;
+	color: #1e1e1e;
+	cursor: pointer
+}
+
+a:hover {
+	color: #39b6fe
+}
+
+.icon {
+	font-family: "icon-fontfamily"
+}
+
+input,textarea {
+	outline: none
+}
+
+.BigDiv {
+	width: 1024px;
+	margin: 0 auto;
+	overflow: hidden
+}
+
+body {
+	width:100%;
+	height:auto;
+	overflow:hidden;
+	font-family: tahoma, arial, 'Hiragino Sans GB', "����", sans-serif;
+	font-size: 12px;
+	color: #333;
+	background: #fff;
+	position:relative;
+}
+
+h1 {
+	font: bold 22px/35px "����";
+	color: #333
+}
+
+h3 {
+	font: bold 14px/1.5 "����"
+}
+
+/* .White_box {
+	width: 1024px;
+	margin: 0 auto;
+	overflow: hidden;
+	margin-top: 20px
+} */
+
+.no_div {
+	position: fixed;
+	width: 1024px;
+	height: 550px;
+	top:50%;
+	left:50%;
+	margin-top:-275px;
+	margin-left:-512px;
+	background: url(../../images/no_power_bg.jpg) no-repeat
+}
+
+.back_btn {
+	float: left;
+	margin-top: 260px;
+	margin-left: 240px
+}
+
+.back_btn a {
+	font-size: 14px;
+	color: #ff921e;
+	border: 1px solid #ff921e;
+	padding: 7px 10px;
+	border-radius: 5px;
+	margin-right: 20px
+}
+
+.back_btn a:hover {
+	color: #fff;
+	background: #ff921e
+}

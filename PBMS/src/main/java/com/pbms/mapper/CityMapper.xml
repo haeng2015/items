@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="boAddressCity">
+	<resultMap id="BaseResultMap" type="com.pbms.pojo.BoAddressCity">
+		<id column="CID" property="cId" jdbcType="VARCHAR" />
+		<result column="CNAME" property="cName" jdbcType="VARCHAR" />
+		<result column="CCODE" property="cCode" jdbcType="VARCHAR" />
+		<result column="CTYPE" property="cType" jdbcType="CHAR" />
+
+		<!-- association一对一配置（多对一），collection表示一对多配置，实体中必须有list属性 -->
+		<association property="province" column="PROVINCE" javaType="com.pbms.pojo.BoAddressProvince" select="boAddressProvince.get">
+		</association>
+
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		CID, CNAME, CCODE,CTYPE,PROVINCE
+	</sql>
+
+	<!-- 根据id查找 -->
+	<select id="get" resultMap="BaseResultMap" parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from bo_site_city
+		where CID = #{cId,jdbcType=VARCHAR}
+	</select>
+
+	<!-- 根据外键查找（省id） -->
+	<select id="selectFks" resultMap="BaseResultMap" parameterType="com.pbms.pojo.BoAddressProvince">
+		select
+		<include refid="Base_Column_List" />
+		from bo_site_city
+		where PROVINCE = #{pId,jdbcType=VARCHAR}
+	</select>
+
+</mapper>

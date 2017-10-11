@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="boAccessoryMapper">
+	<resultMap id="BaseResultMap" type="com.pbms.pojo.BoAccessory">
+		<id column="ID" property="id" jdbcType="INTEGER" />
+		<result column="NAME" property="name" jdbcType="VARCHAR" />
+		<result column="SIGN" property="sign" jdbcType="VARCHAR" />
+		<result column="URL" property="url" jdbcType="VARCHAR" />
+		<result column="SIZE" property="size" jdbcType="BIGINT" />
+		<result column="TYPE" property="type" jdbcType="CHAR" />
+		<result column="DATE" property="date" jdbcType="TIMESTAMP" />
+		<result column="CREATOR" property="creator" jdbcType="INTEGER" />
+
+		<!-- association一对一配置（多对一），collection表示一对多配置，实体中必须有list属性 -->
+		<association property="user" column="BOUSER" javaType="com.pbms.pojo.BoUser" select="boUserMapper.get">
+		</association>
+		<association property="building" column="BOBUILDING" javaType="com.pbms.pojo.BoBuilding" select="boBuildingMapper.get">
+		</association>
+		<association property="room" column="BOROOM" javaType="com.pbms.pojo.BoRoom" select="boRoomMapper.get">
+		</association>
+		<association property="owner" column="BOOWNER" javaType="com.pbms.pojo.BoOwner" select="boOwnerMapper.get">
+		</association>
+
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		id, name, sign, url, size, type, date, CREATOR, BOUSER, BOBUILDING, BOROOM, BOOWNER
+	</sql>
+
+	<!-- 根据id查找 -->
+	<select id="get" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from bo_accessory
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+
+	<!-- 根据外键查找 -->
+	<select id="selectFks" resultMap="BaseResultMap" parameterType="com.pbms.pojo.BoAccessory">
+		select
+		<include refid="Base_Column_List" />
+		from bo_accessory
+		<where>
+			<if test="user != null">
+				BOUSER = #{user.userId,jdbcType=INTEGER}
+			</if>
+			<if test="building != null">
+				BOBUILDING = #{building.buildId,jdbcType=INTEGER}
+			</if>
+			<if test="room != null">
+				BOROOM = #{room.roomId,jdbcType=INTEGER}
+			</if>
+			<if test="owner != null">
+				BOOWNER = #{owner.ownerId,jdbcType=INTEGER}
+			</if>
+		</where>
+	</select>
+
+	<!-- 根据id删除 -->
+	<delete id="delete" parameterType="java.lang.Integer">
+		delete from bo_accessory
+		where id = #{id,jdbcType=INTEGER}
+	</delete>
+
+	<!-- 根据外键删除 -->
+	<delete id="deleteFK" parameterType="com.pbms.pojo.BoAccessory">
+		delete from bo_accessory
+		<where>
+			<if test="user != null">
+				BOUSER = #{user.userId,jdbcType=INTEGER},
+			</if>
+			<if test="building != null">
+				BOBUILDING = #{building.buildId,jdbcType=INTEGER},
+			</if>
+			<if test="room != null">
+				BOROOM = #{room.roomId,jdbcType=INTEGER},
+			</if>
+			<if test="owner != null">
+				BOOWNER = #{owner.ownerId,jdbcType=INTEGER}
+			</if>
+		</where>
+	</delete>
+
+	<!-- 插入对象 -->
+	<insert id="insertSelective" parameterType="com.pbms.pojo.BoAccessory">
+		insert into bo_accessory
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="name != null">
+				name,
+			</if>
+			<if test="sign != null">
+				sign,
+			</if>
+			<if test="url != null">
+				url,
+			</if>
+			<if test="size != null">
+				size,
+			</if>
+			<if test="type != null">
+				type,
+			</if>
+			<if test="date != null">
+				date,
+			</if>
+			<if test="creator != null">
+				creator,
+			</if>
+			<if test="user != null">
+				bouser,
+			</if>
+			<if test="building != null">
+				bobuilding,
+			</if>
+			<if test="room != null">
+				boroom,
+			</if>
+			<if test="owner != null">
+				boowner,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="name != null">
+				#{name,jdbcType=VARCHAR},
+			</if>
+			<if test="sign != null">
+				#{sign,jdbcType=VARCHAR},
+			</if>
+			<if test="url != null">
+				#{url,jdbcType=VARCHAR},
+			</if>
+			<if test="size != null">
+				#{size,jdbcType=BIGINT},
+			</if>
+			<if test="type != null">
+				#{type,jdbcType=CHAR},
+			</if>
+			<if test="date != null">
+				#{date,jdbcType=TIMESTAMP},
+			</if>
+			<if test="creator != null">
+				#{creator,jdbcType=INTEGER},
+			</if>
+			<if test="user != null">
+				#{user.userId,jdbcType=INTEGER},
+			</if>
+			<if test="building != null">
+				#{building.buildId,jdbcType=INTEGER},
+			</if>
+			<if test="room != null">
+				#{room.roomId,jdbcType=INTEGER},
+			</if>
+			<if test="owner != null">
+				#{owner.ownerId,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+
+	<update id="updateByPrimaryKeySelective" parameterType="com.pbms.pojo.BoAccessory">
+		update bo_accessory
+		<set>
+			<if test="name != null">
+				name = #{name,jdbcType=VARCHAR},
+			</if>
+			<if test="sign != null">
+				sign = #{sign,jdbcType=VARCHAR},
+			</if>
+			<if test="url != null">
+				url = #{url,jdbcType=VARCHAR},
+			</if>
+			<if test="size != null">
+				size = #{size,jdbcType=BIGINT},
+			</if>
+			<if test="type != null">
+				type = #{type,jdbcType=CHAR},
+			</if>
+			<if test="date != null">
+				date = #{date,jdbcType=TIMESTAMP},
+			</if>
+			<if test="creator != null">
+				creator = #{creator,jdbcType=INTEGER},
+			</if>
+			<if test="user != null">
+				user = #{user,jdbcType=INTEGER},
+			</if>
+			<if test="building != null">
+				building = #{building,jdbcType=INTEGER},
+			</if>
+			<if test="room != null">
+				room = #{room,jdbcType=INTEGER},
+			</if>
+			<if test="owner != null">
+				owner = #{owner,jdbcType=INTEGER},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+
+</mapper>

@@ -1,0 +1,493 @@
+﻿pre {
+	white-space: pre-wrap !important;
+	word-wrap: break-word !important;
+	*white-space: normal !important
+}
+
+.floatleft {
+	float: left
+}
+
+.floatright {
+	float: right
+}
+
+.clear {
+	clear: both
+}
+
+.overflowHidden {
+	overflow: hidden;
+	-moz-text-overflow: ellipsis;
+	text-overflow: ellipsis;
+	white-space: nowrap
+}
+
+.overflowHidden1 {
+	overflow: hidden
+}
+
+.overflowAuto {
+	overflow: auto;
+	zoom: 1
+}
+
+.textLeft {
+	text-align: left
+}
+
+.textCenter {
+	text-align: center
+}
+
+.textRight {
+	text-align: right
+}
+
+.marginCenter {
+	margin: 0 auto
+}
+
+.W_word {
+	font-family: Microsoft YaHei
+}
+
+* {
+	padding: 0;
+	margin: 0
+}
+
+ul {
+	list-style: none
+}
+
+i,em {
+	font-style: normal
+}
+
+a,img {
+	border: none
+}
+
+a {
+	text-decoration: none;
+	color: #1e1e1e;
+	cursor: pointer
+}
+
+a:hover {
+	color: #456ec8
+}
+
+.icon {
+	font-family: "icon-fontfamily"
+}
+
+input,textarea {
+	outline: none
+}
+
+.BigDiv {
+	width: 1024px;
+	margin: 0 auto;
+	overflow: hidden
+}
+
+body {
+	font-family: tahoma, arial, 'Hiragino Sans GB', "����", sans-serif;
+	font-size: 12px;
+	color: #333;
+	background: #fafafa
+}
+
+h1 {
+	font: bold 22px/35px "����";
+	color: #333
+}
+
+h3 {
+	font: bold 14px/1.5 "����"
+}
+
+.bgO {
+	width: 100%;
+	height: 2px;
+	background: #ff921e
+}
+
+.border_box {
+	border: 1px solid #dadada;
+	margin-top: 10px
+}
+
+.blue_top {
+	height: 32px;
+	line-height: 32px;
+	border-bottom: 2px solid #d01a27;
+	background:#f1f1f1;
+	padding: 0 10px;
+
+}
+
+.blue_top h3 {
+	line-height: 32px;
+	font-size: 14px;
+	float:left;
+}
+.blue_top a .icon {
+    font-size: 26px;
+    color: #adadad;
+    cursor: pointer;
+    margin-right: 4px;
+}
+.blue_top a .icon:hover{
+	color:#333333;
+}
+
+.orange {
+	color: #ff921e
+}
+
+.red {
+	color: #f00
+}
+.bold_red {
+	color: #f00;
+	font-size: 14px;
+}
+
+.grey {
+	color: gray;
+}
+
+.blue {
+	color: #456ec8
+}
+
+.ellipsis-2 {
+	display: -webkit-box;
+	overflow: hidden;
+	white-space: normal !important;
+	text-overflow: ellipsis;
+	word-wrap: break-word;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical
+}
+
+.content {
+	overflow: hidden
+}
+
+.left_nav {
+  width: 158px;
+  float: left;
+  border: 1px solid #b60e17;
+  background: #ffffff;
+}
+.left_nav h2{
+  line-height: 40px;
+  height: 40px;
+  text-align: center;
+  background: #d01a27;
+  font-size: 18px;
+  font-weight: 600;
+  color:#ffff00;
+  margin:0;
+}
+.left_nav h3 {
+  line-height: 40px;
+  height: 40px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 600;
+  color:#333333;
+  cursor:pointer;
+  border-top: 1px solid #b60e17;
+}
+.left_nav h3:hover,
+.left_nav h3.current{
+  color:#d01a27;
+}
+.left_nav h3 .icon {
+  font-size: 18px;
+}
+.left_nav h3 span {
+  color: #333333;
+  margin-right: 10px;
+}
+
+.left_nav h3 i {
+	margin-left: 10px
+}
+
+.left_nav ul {
+	text-align: center;
+	font-size: 14px
+}
+
+.left_nav ul li {
+	line-height: 32px;
+	height: 32px;
+	vertical-align: middle;
+	  border-top: 1px solid #b60e17;
+}
+
+.left_nav ul li a {
+	display: block
+}
+
+.left_nav ul li:hover,.left_nav ul li.cur {
+	background: #ff1e2e;
+}
+
+.left_nav ul li:hover a,.left_nav ul li.cur a {
+	color: #fff
+}
+
+
+.right_div {
+	width: 812px;
+	float: right;
+	background:#f1f1f1;
+}
+
+.flows_top {
+	line-height: 32px;
+	height: 32px;
+	margin: 10px;
+	font-size: 16px;
+	font-family: Microsoft YaHei;
+	font-weight: bold
+}
+
+.flows_top span {
+	color: #ff921e;
+	margin-right: 10px
+}
+
+.products_table {
+/* 	padding-bottom: 10px; */
+	margin-top: 10px
+}
+
+.products_table .table {
+	margin: 0 10px
+}
+
+table {
+	width: 100%
+}
+
+table .sep_row {
+	height: 10px
+}
+
+table .col_hd td {
+	background: #fbeeef;
+	border: solid 1px #ffdee1;
+	border-bottom: none
+}
+
+table .col_hd .order_num {
+	text-align: left;
+	height: 40px;
+	line-height: 40px
+}
+
+table .col_hd .order_num span {
+	margin: 0 10px;
+	display: block;
+	float: left
+}
+
+table .col_hd .order_num input {
+	width: 14px;
+	height: 14px;
+	float: left;
+	margin-top: 13px;
+	margin-right: 10px
+}
+
+table .col_hd .order_num img {
+	width: 81px;
+	height: 23px;
+	float: left;
+	margin-top: 10px
+}
+
+table .shop_type td {
+	border: 1px solid #fbeeef;
+	border-left: none;
+	padding: 10px;
+	background:#fff;
+}
+
+table .shop_type .shop_tit {
+	width: 480px;
+	border-left: 1px solid #fbeeef;
+	line-height: 22px
+}
+table .shop_type .deliver {
+	width: 390px;
+	border-left: 1px solid #daf3ff;
+	line-height: 22px
+}
+
+table .pic {
+	float: left;
+	margin-right: 10px
+}
+
+table .pic,table .pic img {
+	width: 60px;
+	height: 60px
+}
+
+table .zi {
+	float: left;
+	text-align: left;
+	width: 280px
+}
+
+table .shop_name {
+	font-size: 14px;
+	margin-bottom: 10px;
+	display: -webkit-box;
+	overflow: hidden;
+	white-space: normal !important;
+	text-overflow: ellipsis;
+	word-wrap: break-word;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical
+}
+
+table .shop_name a:hover {
+	text-decoration: underline
+}
+
+table .bei span {
+	float: left;
+	line-height: 32px
+}
+
+table .bei .txts {
+	width: 200px;
+	height: 80px
+}
+table .bei .textarea_deliver {
+	width: 300px;
+	height: 80px;
+	resize: none;
+}
+
+.add {
+
+	overflow: auto;
+	zoom: 1
+}
+
+.add p {
+	margin-left: 10px;
+	line-height: 26px
+}
+
+.add p * {
+	float: left
+}
+
+.add p input {
+	margin-right: 4px;
+	padding: 3px
+}
+
+.choice_div {
+	text-align: left;
+	margin: 5px 10px
+}
+
+.add_div {
+	margin: 0 10px 10px;
+
+}
+
+.add_div .add {
+	margin: 4px 0
+}
+
+.log_div {
+	margin: 0 10px 10px
+}
+
+.log_div table {
+	width: 100%;
+
+}
+
+.log_div th,td {
+	padding: 5px 0;
+}
+.log_div td{
+	text-align:left;
+	text-indent:10px;
+} 
+.log_div select {
+	width: 130px;
+	padding: 3px
+}
+
+.log_div .txt {
+	width: 120px;
+	padding: 3px
+}
+
+.log_div .btn {
+	width: 60px;
+	padding: 4px;
+	border: none;
+	background: #39b6fe;
+	color: #fff;
+	cursor: pointer
+}
+
+.log_div .btn:hover {
+	background: #456ec8
+}
+
+.fa_btn {
+	margin: 20px 0;
+	text-align: center
+}
+
+.fa_btn a {
+	display: inline-block;
+	line-height: 40px;
+	width: 130px;
+	height:40px;
+	background: url(../../../images/release2_btn.png) no-repeat;
+	color: #fff;
+	text-align: center;
+	font-size: 20px;
+	font-weight:600;
+
+}
+
+/* .fa_btn a:hover {
+	background: #456ec8
+} */
+
+.upload_div{
+    margin: 0 23px 10px;
+}
+.upload_div input{
+	width:656px;
+	height:22px;
+	background:#fff;
+	border:1px solid #a8a8a8;
+	text-align:left;
+	text-indent:5px;
+	cursor:pointer;
+}
+
+.hide {
+	display: none
+}

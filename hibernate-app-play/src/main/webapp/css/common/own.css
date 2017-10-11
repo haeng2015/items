@@ -1,0 +1,64 @@
+
+/*头部*/
+.panel-header .panel-title{background:#ff921e; color:#fff; text-align:center; height:32px; line-height:32px;}
+
+/*内容头部*/
+.layout-panel-center{padding-left:0px;}
+
+/*搜索*/
+.tb{padding:5px 0 0;}
+.tb input{width:150px;}
+.tb .l-btn{background:#ededed; border:1px solid #d8d8d8; color:#555; padding:0 10px;}
+.tb .l-btn:hover{background:#fe8c12;color:#fff;}
+.panel.datagrid{margin-top:5px;}
+
+/*tab头部*/
+.tabs-panels{border:none;}
+
+/*文字多出隐藏*/
+.datagrid-cell{overflow:hidden;-moz-text-overflow:ellipsis;text-overflow:ellipsis;white-space:nowrap;}
+/*操作小图标*/
+.datagrid-cell-c1-operation{}
+div[class *= "datagrid-cell-"] a{margin:0 10px; cursor:pointer; color:#FFC281;}
+div[class *= "datagrid-cell-"] a:hover{color:#fe8c12;}
+div[class *= "datagrid-cell-"] .icon{font-size:20px;}
+
+/*表格样式*/
+.datagrid-header{border-color:#1e1e1e; background:none;}
+.datagrid-header td{border:none; text-align:center;}
+.datagrid-header td.datagrid-header-over{background:none;}
+.datagrid-body td{border-width: 0 0 1px 0;}
+
+
+.form_div{background:#fff;}
+.detail_tit{height:32px; line-height:32px; font-size:18px;}
+.detail_tit h3{font-size:18px; color:#343434; float:left;}
+.detail_tit i.icon{font-size:26px; float:right; color:#adadad; cursor:pointer; margin-right:4px;}
+.detail_tit h4{font-weight:100; line-height:30px; font-size:16px; border-bottom:1px solid #ff921e; margin:20px 0 10px;}
+.detail_tit em.icon{font-size:18px; margin-right:10px;}
+.detail_table{width:100%;border-width:1px 0 0 1px; border-style:solid; border-color:#dadada;}
+.detail_table tr{line-height:22px;}
+.detail_table th{padding:5px 4px;font-size:14px; border-width:0 1px 1px 0; border-style:solid; border-color:#dadada;}
+.detail_table td{padding:5px 4px; border-width:0 1px 1px 0; border-style:solid; border-color:#dadada;}
+.detail_table tr.evenClass{background:#f7f7f7;}
+.detail_table input.txts{width:70%;}
+.detail_table input.txt{width:20%;}
+.detail_table input.btn{width:120px; padding:7px; color:#fff; background:#12b51a; border:none; cursor:pointer;}
+.detail_table select{min-width:20%;}
+
+.combo-panel{background:#ededed;}
+
+
+a.btn{width:120px; display:block; text-align:center; padding:7px; color:#fff; background:#12b51a; border:none; cursor:pointer; margin:10px auto;}
+
+
+
+
+
+
+
+
+
+
+
+

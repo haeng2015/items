@@ -1,0 +1,532 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<!-- 项目版本信息 -->
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>PBMS</groupId>
+	<artifactId>PBMS</artifactId>
+	<packaging>war</packaging>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>PBMS</name>
+	<url>http://maven.apache.org</url>
+
+	<description>基于spring，struts、springMVC，hibernate、mybatis框架的架构jar包</description>
+
+	<!-- 定义变量：统一版本 -->
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<!-- java版本 -->
+		<java.home>D:\software_engineering\Java\jdk</java.home>
+		<java-version>1.7</java-version>
+		<java-encoding>UTF-8</java-encoding>
+		<!-- 如果jdk是版本6时，javaee 6.0包含类StaticLoggerBinder(5.1.2不冲突)，与slf4j-log4j12中的类相冲突 -->
+		<javaee.version>6.0</javaee.version>
+
+		<!-- spring版本号 -->
+		<spring.version>3.2.3.RELEASE</spring.version>
+
+		<!-- springMVC版本号 -->
+		<springMVC.version>3.2.3.RELEASE</springMVC.version>
+
+		<!-- struts版本号 -->
+		<!-- <struts.version>3.1.4</struts.version> -->
+
+		<!-- hibernate版本号 -->
+		<!-- <hibernate.version>4.2.0.Final</hibernate.version> -->
+
+		<!-- mybatis版本号 -->
+		<mybatis.version>3.2.4</mybatis.version>
+		<mybatis.spring.version>1.2.2</mybatis.spring.version>
+
+		<!-- json版本号 -->
+		<fasterxml.jackson.version>2.1.0</fasterxml.jackson.version>
+		<codehaus.jackson.version>1.9.13</codehaus.jackson.version>
+		<shiro.version>1.3.2</shiro.version>
+
+		<!-- servlet版本号 -->
+		<servlet.version>3.0.1</servlet.version>
+		<jsp.version>2.2</jsp.version>
+		<jstl.version>1.2</jstl.version>
+		<standard.version>1.1.2</standard.version>
+		<el.version>2.2</el.version>
+
+		<!-- 数据库（oracle、mysql）版本 -->
+		<!-- <oracle.version>11.1.0.6.0</oracle.version> -->
+		<mysql.version>5.1.26</mysql.version>
+
+		<!-- slf4j、log4j日志文件管理包版本 -->
+		<slf4j.version>1.7.5</slf4j.version>
+		<log4j.version>1.2.17</log4j.version>
+
+		<!-- AspectJ（也就是AOP）的动机是发现那些使用传统的编程方法无法很好处理的问题 -->
+		<org.aspectj-version>1.7.4</org.aspectj-version>
+	</properties>
+
+	<!-- java、maven，配置、jar包等的版本信息 -->
+	<build>
+		<finalName>${project.artifactId}</finalName>
+		<outputDirectory>${basedir}/src/main/webapp/WEB-INF/classes</outputDirectory>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.3.2</version>
+				<configuration>
+					<source>1.6</source>
+					<target>1.6</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>2.2</version>
+				<configuration>
+					<version>3.0</version>
+					<failOnMissingWebXml>false</failOnMissingWebXml>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.17</version>
+				<configuration>
+					<skipTests>true</skipTests>
+				</configuration>
+			</plugin>
+
+			<!-- 配置要启动的tomact服务器 -->
+			<plugin>
+				<groupId>org.apache.tomcat.maven</groupId>
+				<artifactId>tomcat6-maven-plugin</artifactId>
+				<version>2.17</version>
+				<configuration>
+					<url>http://localhost:8080/PBMS</url>
+					<server>Tomcat7</server>
+					<port>8080</port>
+					<path>/</path>
+				</configuration>
+			</plugin>
+
+			<!-- 把依赖的jar包拷到lib目录下 -->
+			<!-- <plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-dependency-plugin</artifactId> <executions> 
+				<execution> <id>copy-dependencies</id> <phase>package</phase> <goals> <goal>copy-dependencies</goal> </goals> <configuration> 
+				<outputDirectory>${project.build.directory}/lib</outputDirectory> <overWriteReleases>false</overWriteReleases> <overWriteSnapshots>false</overWriteSnapshots> 
+				<overWriteIfNewer>true</overWriteIfNewer> </configuration> </execution> </executions> </plugin> -->
+		</plugins>
+
+		<!-- 如果不添加此节点mybatis的mapper.xml文件都会被漏掉。 -->
+		<!-- 避免出现错误： BeanFactory not initialized or already closed - call 'refresh' before accessing beans via the ApplicationContext -->
+		<resources>
+			<resource>
+				<directory>src/main/java</directory>
+				<includes>
+					<include>**/*.properties</include>
+					<include>**/*.xml</include>
+				</includes>
+				<filtering>false</filtering>
+			</resource>
+			<resource>
+				<directory>src/main/resources</directory>
+				<includes>
+					<include>**/*.properties</include>
+					<include>**/*.xml</include>
+				</includes>
+				<filtering>false</filtering>
+			</resource>
+		</resources>
+	</build>
+
+	<dependencies>
+		<!-- 导入javaEE jar 包 (不可缺少) -->
+		<dependency>
+			<groupId>javax</groupId>
+			<artifactId>javaee-api</artifactId>
+			<version>${javaee.version}</version>
+		</dependency>
+		<!-- <dependency> <groupId>javax</groupId> <artifactId>javaee-web-api</artifactId> <version>${javaee.version}</version> 
+			</dependency> -->
+
+
+		<!-- ============================== servlet import配置区 ================================= -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>${servlet.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet.jsp</groupId>
+			<artifactId>jsp-api</artifactId>
+			<version>${jsp.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<!-- JSTL标签类 -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+			<version>${jstl.version}</version>
+		</dependency>
+		<!-- <dependency> <groupId>taglibs</groupId> <artifactId>standard</artifactId> <version>${standard.version}</version> </dependency> -->
+		<!-- EL标签类 -->
+		<dependency>
+			<groupId>javax.el</groupId>
+			<artifactId>el-api</artifactId>
+			<version>${el.version}</version>
+		</dependency>
+
+		<!-- @Inject -->
+		<!-- <dependency> <groupId>javax.inject</groupId> <artifactId>javax.inject</artifactId> <version>1</version> </dependency> -->
+
+
+		<!-- =============================== spring(SpringFrameWork)配置区 ============================= -->
+		<!-- spring核心包 -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<!-- 包含访问配置文件、创建和管理bean以及进行（IoC/DI）操作相关的所有类 -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-beans</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-oxm</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<!-- spring的事务(transction)管理 -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-tx</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<!-- 包含Spring对JDBC数据访问进行封装的所有类 -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jdbc</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<!-- 为Spring核心提供扩展 -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>${spring.version}</version>
+			<exclusions>
+				<!-- Exclude Commons Logging in favor of SLF4j -->
+				<exclusion>
+					<groupId>commons-logging</groupId>
+					<artifactId>commons-logging</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<!-- 基于AOP的Spring特性：如事务管理 -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-aop</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<!-- spring 整合第三方的 ORM 映射支持，如 hibernate 、Ibatis、Jdo以及spring的JPA的支持 -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-orm</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jms</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-aspects</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<!-- spring表达式语言 -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-expression</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<!-- spring测试类 -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>${spring.version}</version>
+			<!-- 测试：表示开发的时候引入，发布的时候不会加载此包 -->
+			<scope>test</scope>
+		</dependency>
+
+
+		<!-- =============================== springMVC配置区 ============================= -->
+		<!-- 包含Web应用开发时，用到Spring框架时所需的核心类，包括自动载入WebApplicationContext特性的类、 Struts与JSF集成类、文件上传的支持类、Filter类和大量工具辅助类 -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+			<version>${springMVC.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+			<version>${springMVC.version}</version>
+		</dependency>
+		<!-- springMVC套接字 -->
+		<!-- <dependency> <groupId>org.springframework</groupId> <artifactId>spring-websocket</artifactId> <version>${spring.version}</version> 
+			</dependency> -->
+
+
+		<!-- AspectJ：一个面向切面的框架，它扩展了Java语言。AspectJ定义了AOP语法，所以它有一个专门的编译器用来生成遵守Java字节编码规范的Class文件。 -->
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjrt</artifactId>
+			<version>${org.aspectj-version}</version>
+		</dependency>
+		<!-- spring3可选的依赖注入 -->
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjweaver</artifactId>
+			<version>${org.aspectj-version}</version>
+		</dependency>
+
+
+		<!-- =============================== json格式配置区 ============================= -->
+		<!-- org.codehaus的json格式jar包 -->
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-core-asl</artifactId>
+			<version>${codehaus.jackson.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mapper-asl</artifactId>
+			<version>${codehaus.jackson.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>net.sf.json-lib</groupId>
+			<artifactId>json-lib</artifactId>
+			<version>2.4</version>
+			<classifier>jdk15</classifier>
+		</dependency>
+		<!-- com.fasterxml的json格式jar包 -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+			<version>${fasterxml.jackson.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>${fasterxml.jackson.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-annotations</artifactId>
+			<version>${fasterxml.jackson.version}</version>
+		</dependency>
+		<!-- org.json的json格式jar包 -->
+		<dependency>
+			<groupId>org.codeartisans</groupId>
+			<artifactId>org.json</artifactId>
+			<version>20161124</version>
+		</dependency>
+
+
+		<!-- =============================== struts2配置区 ============================= -->
+		<!-- 添加struts2核心包 -->
+		<!-- <dependency> <groupId>org.apache.struts</groupId> <artifactId>struts2-core</artifactId> <version>${struts.version}</version> 
+			</dependency> struts2与spring整合的包 <dependency> <groupId>org.apache.struts</groupId> <artifactId>struts2-spring-plugin</artifactId> 
+			<version>${struts.version}</version> </dependency> -->
+
+
+		<!-- =============================== mybatis配置区 ============================= -->
+		<!-- mybatis核心包 -->
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis</artifactId>
+			<version>${mybatis.version}</version>
+		</dependency>
+		<!-- mybatis/spring整合包 -->
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis-spring</artifactId>
+			<version>${mybatis.spring.version}</version>
+		</dependency>
+		<!-- 引入mybatis缓存的依赖包 -->
+		<dependency>
+			<groupId>org.mybatis.caches</groupId>
+			<artifactId>mybatis-ehcache</artifactId>
+			<version>1.0.2</version>
+		</dependency>
+		<!-- 支持mybatis的懒惰加载 cglib -->
+		<dependency>
+			<groupId>cglib</groupId>
+			<artifactId>cglib-nodep</artifactId>
+			<version>3.2.3</version>
+		</dependency>
+		<!-- cglig引用了如下的asm包。https://mvnrepository.com/artifact/asm/asm -->
+		<dependency>
+			<groupId>asm</groupId>
+			<artifactId>asm</artifactId>
+			<version>3.3.1</version>
+		</dependency>
+
+
+		<!-- =============================== hibernate配置区 ============================= -->
+		<!-- <dependency> <groupId>org.hibernate</groupId> <artifactId>hibernate-core</artifactId> <version>${hibernate.version}</version> 
+			</dependency> <dependency> <groupId>org.hibernate</groupId> <artifactId>hibernate-entitymanager</artifactId> <version>${hibernate.version}</version> 
+			</dependency> <dependency> <groupId>org.hibernate</groupId> <artifactId>hibernate-search</artifactId> <version>${hibernate.version}</version> 
+			</dependency> <dependency> <groupId>org.hibernate</groupId> <artifactId>hibernate-ehcache</artifactId> <version>${hibernate.version}</version> 
+			</dependency> <dependency> <groupId>org.hibernate</groupId> <artifactId>hibernate-proxool</artifactId> <version>${hibernate.version}</version> 
+			</dependency> <dependency> <groupId>org.hibernate</groupId> <artifactId>hibernate-c3p0</artifactId> <version>${hibernate.version}</version> 
+			</dependency> <dependency> <groupId>org.hibernate</groupId> <artifactId>hibernate-envers</artifactId> <version>${hibernate.version}</version> 
+			</dependency> <dependency> <groupId>org.hibernate</groupId> <artifactId>hibernate-validator</artifactId> <version>${hibernate.version}</version> 
+			</dependency> -->
+
+
+		<!-- =============================== Oracle驱动包配置区 ============================= -->
+		<!-- <dependency> <groupId>oracle</groupId> <artifactId>ojdbc6</artifactId> <version>${oracle.version}</version> </dependency> -->
+
+
+		<!-- =============================== mysql驱动包配置区 ============================= -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>${mysql.version}</version>
+		</dependency>
+
+
+		<!-- =============================== druid数据源(阿里巴巴)配置区 ============================= -->
+		<!-- Druid是Java语言中最好的数据库连接池。Druid能够提供强大的监控和扩展功能 -->
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>druid</artifactId>
+			<version>1.0.2</version>
+		</dependency>
+		<!-- 阿里巴巴数据源（Druid）的json格式（fastJson）对象 -->
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>fastjson</artifactId>
+			<version>1.1.24</version>
+		</dependency>
+
+
+		<!-- =============================== c3p0连接池配置区 ============================= -->
+		<!-- C3P0是一个开源的JDBC连接池，它实现了数据源和JNDI绑定，支持JDBC3规范和JDBC2的标准扩展。目前使用它的开源项目有Hibernate，Spring等。 -->
+		<!-- <dependency> <groupId>com.mchange</groupId> <artifactId>c3p0</artifactId> <version>0.9.5-pre8</version> </dependency> -->
+
+
+		<!-- ===================================== dbcp连接池配置区 ==================================== -->
+		<!-- 是 apache 上的一个 java 连接池项目，也是 tomcat 使用的连接池组件。单独使用dbcp需要2个包:commons-dbcp.jar,commons-pool.jar由于建立数据库连接是一个非常耗时耗资源的行为， 
+			所以通过连接池预先同数据库建立一些连接，放在内存中，应用程序需要建立数据库连接时直接到连接池中申请一个就行，用完后再放回去。 -->
+		<!--<dependency> <groupId>org.apache.commons</groupId> <artifactId>commons-dbcp2</artifactId> <version>2.1.1</version> 
+			</dependency> <dependency> <groupId>org.apache.commons</groupId> <artifactId>commons-pool2</artifactId> <version>2.4.2</version> 
+			</dependency> -->
+
+		<!-- Apache Commons Pool 1.6（Java 5.0+） -->
+		<!-- <dependency> <groupId>commons-dbcp</groupId> <artifactId>commons-dbcp</artifactId> <version>1.4</version> </dependency> 
+			<dependency> <groupId>commons-pool</groupId> <artifactId>commons-pool</artifactId> <version>1.6</version> </dependency> -->
+
+
+		<!-- ======================================= shiro配置区 ======================================== -->
+		<!-- Apache Shiro是Java的一个安全框架。它相当简单，对比Spring Security，可能没有Spring Security做的功能强大 Shiro可以非常容易的开发出足够好的应用，其不仅可以用在JavaSE环境，也可以用在JavaEE环境。 
+			Shiro可以帮助我们完成：认证、授权、加密、会话管理、与Web集成、缓存等 -->
+		<!-- <dependency> <groupId>org.apache.shiro</groupId> <artifactId>shiro-core</artifactId> <version>${shiro.version}</version> 
+			</dependency> <dependency> <groupId>org.apache.shiro</groupId> <artifactId>shiro-web</artifactId> <version>${shiro.version}</version> 
+			</dependency> <dependency> <groupId>org.apache.shiro</groupId> <artifactId>shiro-aspectj</artifactId> <version>${shiro.version}</version> 
+			</dependency> <dependency> <groupId>org.apache.shiro</groupId> <artifactId>shiro-quartz</artifactId> <version>${shiro.version}</version> 
+			</dependency> <dependency> <groupId>org.apache.shiro</groupId> <artifactId>shiro-spring</artifactId> <version>${shiro.version}</version> 
+			</dependency> <dependency> <groupId>org.apache.shiro</groupId> <artifactId>shiro-ehcache</artifactId> <version>${shiro.version}</version> 
+			</dependency> -->
+
+
+		<!-- ======================================== junit测试包配置区 ==================================== -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.11</version>
+			<scope>test</scope>
+		</dependency>
+
+
+		<!-- =============================== slf4j and log4j 日志文件管理包配置区 ============================= -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>${slf4j.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>jcl-over-slf4j</artifactId>
+			<version>${slf4j.version}</version>
+			<scope>runtime</scope>
+		</dependency>
+		<!-- 此jar包中的StaticLoggerBinder.class和javaee-api-6.0.jar中引用的StaticLoggerBinder.class相冲突 -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>${slf4j.version}</version>
+			<scope>runtime</scope>
+		</dependency>
+
+		<!-- log4j 日志 -->
+		<!-- <dependency> <groupId>org.slf4j</groupId> <artifactId>log4j-over-slf4j</artifactId> <version>1.6.4</version> </dependency> -->
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>${log4j.version}</version>
+			<!-- <exclusions> <exclusion> <groupId>javax.mail</groupId> <artifactId>mail</artifactId> </exclusion> <exclusion> <groupId> 
+				javax.jms </groupId> <artifactId>jms</artifactId> </exclusion> <exclusion> <groupId>com.sun.jdmk</groupId> <artifactId> jmxtools</artifactId> 
+				</exclusion> <exclusion> <groupId>com.sun.jmx</groupId> <artifactId>jmxri</artifactId> </exclusion> </exclusions> -->
+			<scope>runtime</scope>
+		</dependency>
+
+
+
+		<!-- =============================== kaptcha验证码插件包 ============================= -->
+		<dependency>
+			<groupId>com.github.penggle</groupId>
+			<artifactId>kaptcha</artifactId>
+			<version>2.3.2</version>
+		</dependency>
+		<dependency>
+			<groupId>com.jhlabs</groupId>
+			<artifactId>filters</artifactId>
+			<version>2.0.235-1</version>
+			<scope>compile</scope>
+		</dependency>
+
+
+		<!-- =============================== fileUPload文件上传下载包配置区 ============================= -->
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.4</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+			<version>1.3.1</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
+			<version>1.9</version>
+		</dependency>
+	</dependencies>
+
+</project>

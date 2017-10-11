@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="boAddressProvince">
+	<resultMap id="BaseResultMap" type="com.pbms.pojo.BoAddressProvince">
+		<id column="PID" property="pId" jdbcType="VARCHAR" />
+		<result column="PNAME" property="pName" jdbcType="VARCHAR" />
+		<result column="PCODE" property="pCode" jdbcType="VARCHAR" />
+		<result column="PTYPE" property="pType" jdbcType="CHAR" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		PID, PNAME, PCODE,PTYPE
+	</sql>
+
+	<select id="get" resultMap="BaseResultMap" parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from bo_site_province
+		where PID = #{pId,jdbcType=VARCHAR}
+	</select>
+
+	<select id="selects" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from bo_site_province
+	</select>
+
+
+</mapper>

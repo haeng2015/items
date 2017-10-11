@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="boOwnerMapper">
+	<resultMap id="BaseResultMap" type="com.pbms.pojo.BoOwner">
+		<id column="OWNER_ID" property="ownerId" jdbcType="INTEGER" />
+		<result column="USER_ID" property="userId" jdbcType="INTEGER" />
+		<result column="BUILD_ID" property="buildId" jdbcType="INTEGER" />
+		<result column="ROOM_ID" property="roomId" jdbcType="INTEGER" />
+		<result column="OWNER_NAME" property="ownerName" jdbcType="VARCHAR" />
+		<result column="OWNER_SEX" property="ownerSex" jdbcType="CHAR" />
+		<result column="IS_DELETED" property="isDeleted" jdbcType="CHAR" />
+		<result column="OWNER_ADDR" property="ownerAddr" jdbcType="VARCHAR" />
+		<result column="OWNER_ADDRID" property="ownerAddrId" jdbcType="VARCHAR" />
+		<result column="OWNER_PHONE" property="ownerPhone" jdbcType="VARCHAR" />
+		<result column="OWNER_CARD" property="ownerCard" jdbcType="VARCHAR" />
+		<result column="OWNER_WORK" property="ownerWork" jdbcType="VARCHAR" />
+		<result column="EXTEND1" property="extend1" jdbcType="VARCHAR" />
+		<result column="EXTEND2" property="extend2" jdbcType="VARCHAR" />
+
+		<!-- 外连接对象 -->
+		<!-- <association property="user" column="USER_ID" javaType="com.pbms.pojo.BoUser" select="boUserMapper.get"></association> 
+			<association property="building" column="BUILD_ID" javaType="com.pbms.pojo.BoBuilding" select="boBuildingMapper.get"></association> 
+			<association property="room" column="ROOM_ID" javaType="com.pbms.pojo.BoRoom" select="boRoomMapper.get"></association> -->
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		OWNER_ID, USER_ID, BUILD_ID, ROOM_ID, OWNER_NAME, OWNER_SEX, OWNER_ADDR, OWNER_ADDRID, OWNER_PHONE,
+		OWNER_CARD, OWNER_WORK,IS_DELETED,
+		EXTEND1, EXTEND2
+	</sql>
+
+	<!-- 根据id查找 -->
+	<select id="get" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from bo_owner
+		where OWNER_ID = #{ownerId,jdbcType=INTEGER} AND IS_DELETED = '0'
+	</select>
+
+	<!-- 根据外键查找（单个） -->
+	<select id="selectFk" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from bo_owner
+		where ROOM_ID = #{roomId,jdbcType=INTEGER} AND IS_DELETED = '0'
+	</select>
+
+	<!-- 根据外键查找(多个) -->
+	<select id="selectFks" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from bo_owner
+		where BUILD_ID = #{buildId,jdbcType=INTEGER} AND IS_DELETED = '0'
+	</select>
+
+	<!-- 查找所有 -->
+	<select id="selects" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from bo_owner
+		where IS_DELETED = '0'
+	</select>
+
+	<!-- 根据id删除(致  IS_DELETED = '1'标注即可) -->
+	<update id="isDeleted" parameterType="java.lang.Integer" >
+		update bo_owner
+		<set>
+			IS_DELETED = '1'
+		</set>
+		where OWNER_ID = #{ownerId,jdbcType=INTEGER}
+	</update>
+	
+	<delete id="delete" parameterType="java.lang.Integer">
+		delete from bo_owner
+		where OWNER_ID = #{ownerId,jdbcType=INTEGER}
+	</delete>
+
+	<!-- 带分页的全部查询 -->
+	<!-- 通过_parameter.containsKey('roleName')检查是否存在该值，直接填写key值即可取到map的value值 -->
+	<!-- #{value}方式会自动添加单引号将值当字符串处理，${value}会将值当原始的处理 -->
+	<select id="pageDataGrid" resultMap="BaseResultMap" parameterType="java.util.Map">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM bo_owner owner
+		<where>
+			<!-- 此两种判断map参数值是否为空的方法无效（取map参数的值不能通过params.key取的，而是直接写key值） -->
+			<!-- <if test="_parameter.containsKey('buildName') != null"> -->
+			<!-- <if test="params != null"> -->
+
+			<if test="ownerName != null and ownerName !=''">
+				<!-- AND build.BUILD_NAME LIKE CONCAT('%', CONCAT(${buildName}, '%')) -->
+				AND owner.OWNER_NAME LIKE '%${ownerName}%'
+			</if>
+			<if test="ownerCard != null and ownerCard !=''">
+				AND owner.OWNER_CARD LIKE '%${ownerCard}%'
+				<!-- AND owner.OWNER_CARD = #{ownerCard} -->
+			</if>
+			 AND IS_DELETED = '0'
+		</where>
+		<if test="params != null">
+			ORDER BY owner.${orderColumn} ${orderTurn}
+		</if>
+		<!-- 已在后台RowBounds分页，故无需在此limit -->
+		<!-- LIMIT #{pageNo, jdbcType=INTEGER} , #{pageSize,jdbcType=INTEGER} -->
+
+		<!-- SELECT r.* FROM (SELECT * FROM bo_role role WHERE role.ROLE_NAME LIKE '%员%' LIMIT 1 ,5) r ORDER BY r.ROLE_NAME ASC -->
+	</select>
+
+	<!-- 根据条件查找实体记录数 -->
+	<select id="countParam" resultType="java.lang.Integer" parameterType="java.util.Map">
+		SELECT COUNT(r.OWNER_ID) FROM
+		(SELECT owner.OWNER_ID FROM bo_owner owner
+		<where>
+			<if test="ownerName != null and ownerName !=''">
+				<!-- AND build.BUILD_NAME LIKE CONCAT('%', CONCAT(${buildName}, '%')) -->
+				AND owner.OWNER_NAME LIKE '%${ownerName}%'
+			</if>
+			<if test="ownerCard != null and ownerCard !=''">
+				AND owner.OWNER_CARD LIKE '%${ownerCard}%'
+			</if>
+			 AND IS_DELETED = '0'
+		</where>
+		) r
+	</select>
+
+	<!-- 部分插入 -->
+	<insert id="insertSelective" parameterType="com.pbms.pojo.BoOwner" keyProperty="ownerId" useGeneratedKeys="true">
+		insert into bo_owner
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<!-- 可能为空值 -->
+			BUILD_ID,
+			ROOM_ID,
+			<if test="userId != null">
+				USER_ID,
+			</if>
+			<if test="ownerName != null">
+				OWNER_NAME,
+			</if>
+			<if test="ownerSex != null">
+				OWNER_SEX,
+			</if>
+			<if test="ownerAddr != null">
+				OWNER_ADDR,
+			</if>
+			<if test="ownerAddrId != null">
+				OWNER_ADDRID,
+			</if>
+			<if test="ownerPhone != null">
+				OWNER_PHONE,
+			</if>
+			<if test="ownerCard != null">
+				OWNER_CARD,
+			</if>
+			<if test="ownerWork != null">
+				OWNER_WORK,
+			</if>
+			<if test="isDeleted != null">
+				IS_DELETED,
+			</if>
+			<if test="extend1 != null">
+				EXTEND1,
+			</if>
+			<if test="extend2 != null">
+				EXTEND2,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="userId != null">
+				#{userId,jdbcType=INTEGER},
+			</if>
+			#{buildId,jdbcType=INTEGER},
+			#{roomId,jdbcType=INTEGER},
+			<if test="ownerName != null">
+				#{ownerName,jdbcType=VARCHAR},
+			</if>
+			<if test="ownerSex != null">
+				#{ownerSex,jdbcType=CHAR},
+			</if>
+			<if test="ownerAddr != null">
+				#{ownerAddr,jdbcType=VARCHAR},
+			</if>
+			<if test="ownerAddrId != null">
+				#{ownerAddrId,jdbcType=VARCHAR},
+			</if>
+			<if test="ownerPhone != null">
+				#{ownerPhone,jdbcType=VARCHAR},
+			</if>
+			<if test="ownerCard != null">
+				#{ownerCard,jdbcType=VARCHAR},
+			</if>
+			<if test="ownerWork != null">
+				#{ownerWork,jdbcType=VARCHAR},
+			</if>
+			<if test="isDeleted != null">
+				#{isDeleted,jdbcType=CHAR},
+			</if>
+			<if test="extend1 != null">
+				#{extend1,jdbcType=VARCHAR},
+			</if>
+			<if test="extend2 != null">
+				#{extend2,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+
+	<update id="updateSelective" parameterType="com.pbms.pojo.BoOwner">
+		update bo_owner
+		<set>
+			<if test="userId != null">
+				USER_ID = #{userId,jdbcType=INTEGER},
+			</if>
+			<!-- 可能为空值 -->
+			BUILD_ID = #{buildId,jdbcType=INTEGER},
+			ROOM_ID = #{roomId,jdbcType=INTEGER},
+			<if test="ownerName != null">
+				OWNER_NAME = #{ownerName,jdbcType=VARCHAR},
+			</if>
+			<if test="ownerSex != null">
+				OWNER_SEX = #{ownerSex,jdbcType=CHAR},
+			</if>
+			<if test="ownerAddr != null">
+				OWNER_ADDR = #{ownerAddr,jdbcType=VARCHAR},
+			</if>
+			<if test="ownerAddrId != null">
+				OWNER_ADDRID = #{ownerAddrId,jdbcType=VARCHAR},
+			</if>
+			<if test="ownerPhone != null">
+				OWNER_PHONE = #{ownerPhone,jdbcType=VARCHAR},
+			</if>
+			<if test="ownerCard != null">
+				OWNER_CARD = #{ownerCard,jdbcType=VARCHAR},
+			</if>
+			<if test="ownerWork != null">
+				OWNER_WORK = #{ownerWork,jdbcType=VARCHAR},
+			</if>
+			<if test="isDeleted != null">
+				IS_DELETED = #{isDeleted,jdbcType=CHAR},
+			</if>
+			<if test="extend1 != null">
+				EXTEND1 = #{extend1,jdbcType=VARCHAR},
+			</if>
+			<if test="extend2 != null">
+				EXTEND2 = #{extend2,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where OWNER_ID = #{ownerId,jdbcType=INTEGER}
+	</update>
+</mapper>

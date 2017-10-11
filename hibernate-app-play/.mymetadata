@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="hibernate-app-play"
+  id="myeclipse.1475887116282"
+  context-root="/hibernate-app-play"
+  j2ee-spec="6.0"
+  archive="hibernate-app-play.war">
+  <attributes>
+    <attribute name="webrootdir" value="src/main/webapp" />
+  </attributes>
+</project-module>
+

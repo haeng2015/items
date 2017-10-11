@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="roleAuthMapper">
+
+	<resultMap id="BaseResultMap" type="com.pbms.pojo.RoleAuth">
+		<id column="ID" property="id" jdbcType="INTEGER" />
+		<!-- role 一对一配置 -->
+		<association property="role" javaType="com.pbms.pojo.BoRole">
+			<!-- 引用BoRoleMapper.xml中的select方法，加namespace名（boRoleMapper） select="boRoleMapper.get" column="ROLE_ID"> -->
+			<id column="ROLE_ID" property="roleId" jdbcType="INTEGER" />
+			<result column="ROLE_NAME" property="roleName" jdbcType="VARCHAR" />
+			<result column="ROLE_TYPE" property="roleType" jdbcType="CHAR" />
+			<result column="USER_ID" property="userId" jdbcType="INTEGER" />
+			<result column="EXTEND1" property="extend1" jdbcType="VARCHAR" />
+			<result column="EXTEND2" property="extend2" jdbcType="VARCHAR" />
+		</association>
+
+		<association property="auth" javaType="com.pbms.pojo.BoAuth">
+			<id column="AUTH_ID" property="authId" jdbcType="INTEGER" />
+			<result column="P_ID" property="pId" jdbcType="INTEGER" />
+			<result column="AUTH_NAME" property="authName" jdbcType="VARCHAR" />
+			<result column="AUTH_URL" property="authUrl" jdbcType="VARCHAR" />
+			<result column="AUTH_TYPE" property="authType" jdbcType="CHAR" />
+			<result column="IS_LEAFNODE" property="isLeafNode" jdbcType="CHAR" />
+			<result column="EXTEND1" property="extend1" jdbcType="VARCHAR" />
+			<result column="EXTEND2" property="extend2" jdbcType="VARCHAR" />
+
+			<collection column="AUTH_ID" ofType="com.pbms.pojo.BoAuth" property="childrens" javaType="java.util.ArrayList"
+				select="boAuthMapper.selectFks"></collection>
+		</association>
+	</resultMap>
+
+	<delete id="delete" parameterType="com.pbms.pojo.RoleAuth">
+		delete from role_auth
+		where ROLE_ID = #{role.roleId,jdbcType=INTEGER}
+	</delete>
+
+	<!-- 根据外键（角色）查找 -->
+	<select id="selectFks" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+		select
+		auth.*,ra.*
+		from role_auth ra, bo_auth auth
+		where
+		ra.AUTH_ID = auth.AUTH_ID
+		AND ra.ROLE_ID = #{roleId,jdbcType=INTEGER}
+	</select>
+
+	<insert id="insertSelective" parameterType="com.pbms.pojo.RoleAuth">
+		insert into role_auth
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="role != null">
+				ROLE_ID,
+			</if>
+			<if test="auth != null">
+				AUTH_ID,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="role != null">
+				#{role.roleId,jdbcType=INTEGER},
+			</if>
+			<if test="auth != null">
+				#{auth.authId,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+</mapper>

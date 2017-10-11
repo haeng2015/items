@@ -1,0 +1,65 @@
+#main{
+font-size:12px;
+}
+
+#index{
+margin:0px auto;
+padding-top:10px;
+}
+
+#table{
+margin:0px auto;
+padding:5px;
+text-align:center;
+}
+
+#table table{
+border-collapse:collapse;
+}
+
+#table table th,td{
+border:#cccccc 1px solid;
+margin:0px;
+padding:5px 20px;
+}
+
+#table table tfoot{
+margin:0px;
+}
+
+#table table tfoot h5{
+  float:left;
+  margin:0px 3px;
+}
+
+#table table tfoot ul{
+list-style:none;
+}
+
+#table table tfoot ul li{
+float:left;
+margin:2px 3px;
+}
+
+#table table tfoot #pagenumber{
+width:20px;
+height:10px;
+width:70px;
+margin:0px;
+vertical-align:top;
+}
+
+#table table tfoot #pagenumber{
+font-size:10px;
+}
+
+.button input{
+height:25px;
+width:60px;
+background:#FFFFFF;
+border-bottom:#666666 1px solid;
+border-right:#666666 1px solid;
+border-top:#FFFFFF 1px solid;
+border-left:#FFFFFF 1px solid;
+
+}

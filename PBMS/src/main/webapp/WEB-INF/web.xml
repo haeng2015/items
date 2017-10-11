@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:web="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+	version="3.0">
+	<display-name>PBMS</display-name>
+
+	<!-- ======================================设置session======================================= -->
+	<!-- session超时时间（分钟） -->
+	<session-config>
+		<session-timeout>30</session-timeout>
+	</session-config>
+
+	<!-- ========================================配置编码过滤器====================================== -->
+	<filter>
+		<filter-name>CharacterEncodingFilter</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+		<init-param>
+			<param-name>forceEncoding</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>CharacterEncodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+
+	<!-- ====================================配置 log4j========================================= -->
+	<context-param>
+		<param-name>log4jConfigLocation</param-name>
+		<param-value>/WEB-INF/classes/conf/log4j.properties</param-value>
+		<!-- <param-value>classpath:conf/log4j.properties</param-value> -->
+	</context-param>
+	<!-- 设置Log4j刷新时间 -->
+	<context-param>
+		<param-name>log4jRefreshInterval</param-name>
+		<param-value>60000</param-value>
+	</context-param>
+	<!-- 作用：1、防止项目之间的名称冲突。2、在Web Container启动时将把ROOT的绝对路径写到系统变量里 3、log4j的配置文件里就可以用${PBMS.root }来表示Web目录的绝对路径，但是要把log配置文件存放于WEB-INF下 
+		如：log4j.appender.A_default.File=${PBMS.root}/WEB-INF/logs/log4j.log -->
+	<!-- <param-name>log4jConfigLocation</param-name> <param-value>/WEB-INF/log4j.properties</param-value> -->
+	<context-param>
+		<param-name>webAppRootKey</param-name>
+		<param-value>PBMS.root</param-value>  <!-- 默认webapp.root -->
+	</context-param>
+	<!-- 配置Log4j监听器() log4j:WARN No appenders could be found for logger (org.springframework.test.context.junit4.SpringJUnit4ClassRunner). -->
+	<listener>
+		<listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
+	</listener>
+
+
+	<!-- ========================================配置 Spring======================================= -->
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<!-- <param-value>/WEB-INF/lib/conf/spring.xml</param-value> -->
+		<param-value>classpath:conf/spring.xml</param-value>
+	</context-param>
+	<!-- spring监听器 -->
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+
+	<!-- 自定义监听器配置 -->
+	<listener>
+		<listener-class>com.pbms.listener.InitServletContext</listener-class>
+	</listener>
+
+	<!-- 防止spring内存溢出监听器 -->
+	<listener>
+		<listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>
+	</listener>
+
+	<!-- 解决Hibernate的Session的关闭与开启问题（它允许在事务提交之后延迟加载显示所需要的对象） ；
+		主要功能是用来把一个Hibernate会话和一次完整的请求过程对应的线程相关定； 
+		目的是为了实现“开放会话in View“的模式。例如：它允许在事务提交之后延迟加载显示所需要的对象。
+		把Session关闭延长至页面加载数据完毕 -->
+	<!-- <filter>
+		<filter-name>openSessionInViewFilter</filter-name>
+		<filter-class>org.springframework.orm.hibernate4.support.OpenSessionInViewFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>openSessionInViewFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping> -->
+
+	<context-param>
+		<param-name>spring.profiles.active</param-name>
+		<param-value>dev</param-value>
+	</context-param>
+	<context-param>
+		<param-name>spring.profiles.default</param-name>
+		<param-value>dev</param-value>
+	</context-param>
+	<context-param>
+		<param-name>spring.liveBeansView.mbeanDomain</param-name>
+		<param-value>dev</param-value>
+	</context-param>
+
+
+	<!-- ========================================配置springMVC拦截器====================================== -->
+	<servlet>
+		<servlet-name>spring</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>classpath:conf/spring-mvc.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>spring</servlet-name>
+		<url-pattern>*.do</url-pattern>
+	</servlet-mapping>
+
+
+
+	<!-- =================================配置Druid数据源的过滤器=================================== -->
+	<filter>
+		<filter-name>DruidWebStatFilter</filter-name>
+		<filter-class>com.alibaba.druid.support.http.WebStatFilter</filter-class>
+		<init-param>
+			<param-name>exclusions</param-name>
+			<param-value>*.js,*.gif,*.jpg,*.png,*.css,*.ico,*.jsp,/druid/*,/download/*</param-value>
+		</init-param>
+		<init-param>
+			<param-name>sessionStatMaxCount</param-name>
+			<param-value>2000</param-value>
+		</init-param>
+		<init-param>
+			<param-name>sessionStatEnable</param-name>
+			<param-value>true</param-value>
+		</init-param>
+		<init-param>
+			<param-name>principalSessionName</param-name>
+			<param-value>xxx.user</param-value>
+		</init-param>
+		<init-param>
+			<description>
+				如果你的user信息保存在cookie中，你可以配置principalCookieName，使得druid知道当前的user是谁
+				根据需要，把其中的xxx.user修改为你user信息保存在cookie中的cookieName
+			</description>
+			<param-name>principalCookieName</param-name>
+			<param-value>xxx.user</param-value>
+		</init-param>
+		<init-param>
+			<description>配置profileEnable能够监控单个url调用的sql列表</description>
+			<param-name>profileEnable</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>DruidWebStatFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+
+	<!-- ==========================================配置Druid数据源的页面 ================================= -->
+	<servlet>
+		<servlet-name>DruidStatView</servlet-name>
+		<servlet-class>com.alibaba.druid.support.http.StatViewServlet</servlet-class>
+		<init-param>
+			<param-name>resetEnable</param-name>
+			<param-value>true</param-value>
+		</init-param>
+		<init-param>
+			<param-name>loginUsername</param-name>
+			<param-value>druid</param-value>
+		</init-param>
+		<init-param>
+			<param-name>loginPassword</param-name>
+			<param-value>druid</param-value>
+		</init-param>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>DruidStatView</servlet-name>
+		<url-pattern>/druid/*</url-pattern>
+	</servlet-mapping>
+
+
+	<!-- =========================================配置验证码生成器（不适用与springMVC中）=================================== -->
+	<!-- 配置验证码插件servlet类(如果是springMVC架构，需要将其配置在spring配置文件中) -->
+	<!-- <servlet> <servlet-name>Kaptcha</servlet-name> <servlet-class>com.google.code.kaptcha.servlet.KaptchaServlet</servlet-class> 
+		给验证码插件servlet类配置参数:生成图片的Servlet 边框设置 yes no <init-param> <param-name>kaptcha.border</param-name> <param-value>no</param-value> 
+		</init-param> 边框颜色 颜色名称 例如：red blue black等 也可以是 RGB：105,179,90 <init-param> <param-name>kaptcha.border.color</param-name> 
+		<param-value>red</param-value> </init-param> 边框宽度 <init-param> <param-name>kaptcha.border.thickness</param-name> <param-value>5</param-value> 
+		</init-param> 产生验证码的字符源头 兼容中文的 <init-param> <param-name>kaptcha.textproducer.char.string</param-name> <param-value>2345共2354阿斯asdf蒂芬2345爬墙2345额问题了ewry空1254间的股fktiul份的y7u12354o私人254认可ry13254iu的身份报123告快乐</param-value> 
+		</init-param> 生成结果的字符个数 <init-param> <param-name>kaptcha.textproducer.char.length</param-name> <param-value>5</param-value> 
+		</init-param> 生成结果的字符字体 <init-param> <param-name>kaptcha.textproducer.font.names</param-name> <param-value>微软雅黑,宋体,楷体</param-value> 
+		</init-param> 生成结果的字符大小 <init-param> <param-name>kaptcha.textproducer.font.size</param-name> <param-value>40</param-value> 
+		</init-param> 生成结果的字符 颜色 <init-param> <param-name>kaptcha.textproducer.font.color</param-name> <param-value>blue</param-value> 
+		</init-param> 生成结果的字符 字间距 <init-param> <param-name>kaptcha.textproducer.char.space</param-name> <param-value>2</param-value> 
+		</init-param> 干扰线 生成器 <init-param> <param-name>kaptcha.noise.impl</param-name> <param-value>com.google.code.kaptcha.impl.DefaultNoise</param-value> 
+		</init-param> 干扰线 颜色 <init-param> <param-name>kaptcha.noise.color</param-name> <param-value>BLACK</param-value> </init-param> 
+		干扰线 背景渐变颜色 从左侧向右渐变 <init-param> <param-name>kaptcha.background.clear.from</param-name> <param-value>green</param-value> </init-param> 
+		干扰线 背景渐变颜色 从右侧向左渐变 <init-param> <param-name>kaptcha.background.clear.to</param-name> <param-value>yellow</param-value> </init-param> 
+		验证码图片宽度 <init-param> <param-name>kaptcha.image.width</param-name> <param-value>200</param-value> </init-param> 验证码图片高度 <init-param> 
+		<param-name>kaptcha.image.height</param-name> <param-value>50</param-value> </init-param> </servlet> 验证码请求名 映射(kaptcha.jpg名任意，与jsp页面中img的src属性对应) 
+		<servlet-mapping> <servlet-name>Kaptcha</servlet-name> <url-pattern>/kaptcha.jpg</url-pattern> </servlet-mapping> 注册VerifyServlet:检查验证码是否输入正确 
+		<servlet> <description>检查验证码生成器servlet映射</description> <servlet-name>KaptchaServlet</servlet-name> <servlet-class>com.pbms.controller.common.LoginController</servlet-class> 
+		</servlet> <servlet-mapping> <servlet-name>KaptchaServlet</servlet-name> <url-pattern>/checkCodeImage</url-pattern> </servlet-mapping> -->
+
+
+	<!-- =========================================默认页面=================================== -->
+	<welcome-file-list>
+		<welcome-file>index.jsp</welcome-file>
+	</welcome-file-list>
+	<error-page>
+		<error-code>404</error-code>
+		<location>/WEB-INF/error.jsp</location>
+	</error-page>
+	<error-page>
+		<error-code>405</error-code>
+		<location>/WEB-INF/error.jsp</location>
+	</error-page>
+	<error-page>
+		<error-code>500</error-code>
+		<location>/WEB-INF/error.jsp</location>
+	</error-page>
+
+	<!-- ===============================设置不拦截的后缀名（静态页面）================================= -->
+	<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>*.css</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>*.mp4</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>*.json</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>*.js</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>*.eot</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>*.svg</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>*.ttf</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>*.woff</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>*.gif</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>*.png</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>*.jpg</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>*.ico</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>*.doc</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>*.xls</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>*.docx</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>*.xlsx</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>*.txt</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>*.swf</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>*.xml</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>*.htm</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>*.sql</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>*.html</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>*.apk</url-pattern>
+	</servlet-mapping>
+</web-app>
