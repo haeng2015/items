@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+
+
+<!-- 此为数据库表列与实体bean对象属性的映射配置文件 -->
+<!-- name属性对应column字段 -->
+<hibernate-mapping>
+
+	<!-- 建立路径，为该表tab_student创建相关列 -->   <!--lazy延时加载 关闭false,打开是true -->
+	<class name="com.hibernate._11pk.Girl_11pk" table="Girl_11pk" lazy="false">
+	
+		<!-- cache启动缓冲加载usage模式，region为选择加载模式(在ehcache.xml中选择) -->
+		<cache usage="read-write" region="defaultCache" />
+		
+		<!-- name需要与实体bean对象中的属性名相同，column为数据库中字段列名 -->
+		
+		<!-- 通过主键方式一对一 -->
+		<id name="gId" column="girl_id">
+			<generator class="foreign">
+				<param name="property">girl_pro</param>
+			</generator>
+		</id>   
+		
+		<property name="gName" column="girl_name"></property>
+		<property name="gAge" column="girl_age"></property>
+		
+		<!-- 一对一有两种对应方式，通过主键或者通过其他字段 -->
+		<!-- cascade="save-update"为级联保存方式 fetch="join"为 -->
+		<!-- lazy为查询结果的显示，若为true则分批显示结果，可能在传递数据中no session异常，因此应该关闭懒查询 -->
+		
+		<!-- 通过主键方式  constrained constrained（约束） (可选) 表明该类对应的表对应的数据库表，和被关联的对象所对应的数据库表之间，
+		通过一个外键引用对主键进行约束。这个选项影响save() 和delete() 在级联执行时的先后顺序（也在schema export tool中被使用）。-->
+		<one-to-one name="boy" constrained="true" cascade="save-update" fetch="join"></one-to-one>
+		
+	</class>
+
+</hibernate-mapping>

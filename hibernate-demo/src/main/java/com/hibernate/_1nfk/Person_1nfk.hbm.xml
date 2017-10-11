@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+
+
+<!-- 此为数据库表列与实体bean对象属性的映射配置文件 -->
+<!-- name属性对应column字段 -->
+<hibernate-mapping>
+
+	<!-- 建立路径，为该表tab_student创建相关列 -->   
+	<!--lazy延时加载 关闭false,打开是true ,关闭则一次查询显示-->
+	<class name="com.hibernate._1nfk.Person_1nfk" table="Person_1nfk" lazy="false">
+	
+		<!-- cache启动缓冲加载usage模式，region为选择加载模式(在ehcache.xml中选择) -->
+		<cache usage="read-write" region="defaultCache" />
+		
+		<!-- name需要与实体bean对象中的属性名相同，column为数据库中字段列名 -->
+		
+		<id name="perId" column="per1n_id">
+			<generator class="sequence">  <!-- generator为主键生成序列 -->
+				<param name="sequence">person1nfk_seq</param>
+			</generator>
+		</id>
+		
+		<property name="name" column="per1n_name"></property>
+		<property name="age" column="per1n_age"></property>
+	</class>
+
+</hibernate-mapping>

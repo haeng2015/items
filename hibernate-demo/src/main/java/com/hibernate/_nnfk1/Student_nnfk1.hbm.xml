@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+
+
+<!-- 此为数据库表列与实体bean对象属性的映射配置文件 -->
+<!-- name属性对应column字段 -->
+<hibernate-mapping>
+
+	 <!--lazy延时加载 关闭false,打开是true -->
+	<class name="com.hibernate._nnfk1.Student_nnfk1" table="Student_nnfk1" lazy="false">
+	
+		<!-- cache启动缓冲加载usage模式，region为选择加载模式(在ehcache.xml中选择) -->
+		<cache usage="read-write" region="defaultCache" />
+		
+		<!-- name需要与实体bean对象中的属性名相同，column为数据库中字段列名 -->
+		
+		<id name="stuId" column="stu_id">
+			<generator class="sequence">  <!-- generator为主键生成序列 -->
+				<param name="sequence">student1_seq</param>
+			</generator>
+		</id>
+		
+		<property name="stuName" column="stu_name"></property>
+		<property name="stuAge" column="stu_Age"></property>
+
+		<!-- cascade="save-update"为级联保存方式 fetch="join"为 -->
+		<!-- lazy为查询结果的显示，若为true则分批显示结果，可能在传递数据中no session异常，因此应该关闭懒查询 -->
+
+		<!-- 多对多需要一张中间表作为连接两表关系的桥梁(两表的主键为该表的字段)  -->
+		<set name="tchSet" table="Stu_Tch" cascade="save-update" lazy="false" fetch="join">
+			<key column="stu_id"></key>
+			<many-to-many class="com.hibernate._nnfk1.Teacher_nnfk1" column="tch_Id"></many-to-many>
+		</set>
+	</class>
+
+</hibernate-mapping>

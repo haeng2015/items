@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+
+
+<!-- 此为数据库表列与实体bean对象属性的映射配置文件 -->
+<!-- name属性对应column字段 -->
+<hibernate-mapping>
+
+	<!-- 建立路径，为该表tab_student创建相关列 -->   
+	<!--lazy延时加载 关闭false,打开是true ,关闭则一次查询显示-->
+	<class name="com.hibernate._n11nfk.Person_n11nfk" table="Person_n11nfk" lazy="false">
+	
+		<!-- cache启动缓冲加载usage模式，region为选择加载模式(在ehcache.xml中选择) -->
+		<cache usage="read-write" region="defaultCache" />
+		
+		<!-- name需要与实体bean对象中的属性名相同，column为数据库中字段列名 -->
+		
+		<id name="perId" column="pern11n_id">
+			<generator class="sequence">  <!-- generator为主键生成序列 -->
+				<param name="sequence">personn11nfk_seq</param>
+			</generator>
+		</id>
+		
+		<property name="name" column="pern11n_name"></property>
+		<property name="age" column="pern11n_age"></property>
+		<!-- 此列名必须与Address_n11nfk.hbm.xml中的<key column="addn11n_id"></key>相同
+		否则，建立的表所对应的主外键不对应 -->
+		<many-to-one name="address" column="addn11n_id" cascade="save-update" lazy="false" fetch="join"></many-to-one>
+	</class>
+
+</hibernate-mapping>

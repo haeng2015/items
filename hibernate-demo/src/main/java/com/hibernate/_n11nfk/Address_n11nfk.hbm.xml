@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+
+
+<!-- 此为数据库表列与实体bean对象属性的映射配置文件 -->
+<!-- name属性对应column字段 -->
+<hibernate-mapping>
+
+	<!-- 建立路径，为该表tab_student创建相关列 -->   
+	<!--lazy延时懒惰查询机制加载 关闭false，一次性查询,打开是true 分批次查询-->
+	<class name="com.hibernate._n11nfk.Address_n11nfk" table="address_n11nfk">
+	
+		<!-- cache启动缓冲加载usage模式，region为选择加载模式(在ehcache.xml中选择) -->
+		<cache usage="read-write" region="defaultCache" />
+		
+		<!-- name需要与实体bean对象中的属性名相同，column为数据库中字段列名 -->
+		
+		<id name="addId" column="addn11n_id" >
+			<generator class="sequence">  <!-- generator为主键生成序列 -->
+				<param name="sequence">addressn11nfk_seq</param>
+			</generator>
+		</id>
+		
+		<property name="address" column="addn11n_name"></property>
+		
+		<!-- 一对多在一xml处配置关联，由于外键采用set集合存数据(唯一、无序)，此处需用set标签 -->
+		<!-- inverse为双向关联的标签，true为交给对方控制，false为默认由自己控制 -->
+		<set name="perSet" cascade="save-update" lazy="false" fetch="join" inverse="false" >
+			<!-- 设置外键字段（此处的列名字段应该与该xml文件的主键字段相同） -->
+			<key column="addn11n_id"></key>   
+			<!-- 设置set属性泛型的类路径 -->
+			<one-to-many class="com.hibernate._n11nfk.Person_n11nfk" />
+		</set>
+		
+	</class>
+
+</hibernate-mapping>

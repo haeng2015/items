@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+
+
+<!-- 此为数据库表列与实体bean对象属性的映射配置文件 -->
+<!-- name属性对应column字段 -->
+<hibernate-mapping>
+
+	<!-- 建立路径，为该表tab_student创建相关列 -->   <!--lazy延时加载 关闭false,打开是true -->
+	<class name="com.hibernate._11fk.Girl_11fk" table="Girl_11fk" lazy="false">
+	
+		<!-- cache启动缓冲加载usage模式，region为选择加载模式(在ehcache.xml中选择) -->
+		<cache usage="read-write" region="defaultCache" />
+		
+		<!-- name需要与实体bean对象中的属性名相同，column为数据库中字段列名 -->
+		
+		<!-- 通过外键方式一对一 -->
+		<id name="gId" column="girl_id">
+			<generator class="sequence">
+				<param name="sequence">girl_seq</param>
+			</generator>  
+		</id>  
+		
+		<property name="gName" column="girl_name"></property>
+		<property name="gAge" column="girl_age"></property>
+		
+		<!-- 一对一有两种对应方式，通过主键或者通过其他字段 -->
+		<!-- cascade="save-update"为级联保存方式 fetch="join"为级联方式 -->
+		<!-- lazy为查询结果的显示，若为true则分批显示结果，可能在传递数据中no session异常，因此应该关闭懒查询 -->
+		
+		<!-- 通过外键方式 unique -->
+		<many-to-one name="boy" column="bid" unique="true" cascade="save-update" fetch="join"></many-to-one>
+	</class>
+
+</hibernate-mapping>

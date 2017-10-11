@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+
+
+<!-- 此为数据库表列与实体bean对象属性的映射配置文件 -->
+<!-- class类中的name属性对应数据库中的列column字段 -->
+<hibernate-mapping>
+
+	<class name="com.hibernate._nnfk1.Teacher_nnfk1" table="Teacher_nnfk1">
+	
+		<!-- cache启动缓冲加载usage模式，region为选择加载模式(在ehcache.xml中选择) -->
+		<cache usage="read-write" region="defaultCache" />
+		
+		<!-- name需要与实体bean对象中的属性名相同，column为数据库中字段列名 -->
+		
+		<id name="tchId" column="tch_Id">
+			<generator class="sequence">  <!-- generator为主键生成序列 -->
+				<param name="sequence">teacher1_seq</param>
+			</generator>
+		</id>
+		
+		<property name="tchName" column="tch_name"></property>
+		<property name="tchAge" column="tch_age"></property>
+	</class>
+
+</hibernate-mapping>

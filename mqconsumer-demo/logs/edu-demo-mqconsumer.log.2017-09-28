@@ -1,0 +1,18 @@
+[INFO ][20170928 08:59:58,424][AbstractApplicationContext:510] Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@5eaf3cf6: startup date [Thu Sep 28 08:59:58 CST 2017]; root of context hierarchy
+[INFO ][20170928 08:59:58,507][XmlBeanDefinitionReader:315] Loading XML bean definitions from class path resource [spring-rabbitmq/spring-context.xml]
+[INFO ][20170928 08:59:58,859][XmlBeanDefinitionReader:315] Loading XML bean definitions from class path resource [spring-rabbitmq/spring-rabbit-mq.xml]
+[INFO ][20170928 09:00:47,187][AbstractApplicationContext:510] Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@2c798781: startup date [Thu Sep 28 09:00:47 CST 2017]; root of context hierarchy
+[INFO ][20170928 09:00:47,266][XmlBeanDefinitionReader:315] Loading XML bean definitions from class path resource [spring-rabbitmq/spring-context.xml]
+[INFO ][20170928 09:00:47,584][XmlBeanDefinitionReader:315] Loading XML bean definitions from class path resource [spring-rabbitmq/spring-rabbit-mq.xml]
+[INFO ][20170928 09:06:00,185][AbstractApplicationContext:510] Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@5eaf3cf6: startup date [Thu Sep 28 09:06:00 CST 2017]; root of context hierarchy
+[INFO ][20170928 09:06:00,268][XmlBeanDefinitionReader:315] Loading XML bean definitions from class path resource [spring-rabbitmq/spring-context.xml]
+[INFO ][20170928 09:06:00,557][XmlBeanDefinitionReader:315] Loading XML bean definitions from class path resource [spring-rabbitmq/spring-rabbit-mq.xml]
+[INFO ][20170928 09:12:40,018][AbstractApplicationContext:510] Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@38e07fc8: startup date [Thu Sep 28 09:12:40 CST 2017]; root of context hierarchy
+[INFO ][20170928 09:12:40,090][XmlBeanDefinitionReader:315] Loading XML bean definitions from class path resource [spring-rabbitmq/spring-context.xml]
+[INFO ][20170928 09:12:40,375][XmlBeanDefinitionReader:315] Loading XML bean definitions from class path resource [spring-rabbitmq/spring-rabbit-mq.xml]
+[INFO ][20170928 09:18:45,395][AbstractApplicationContext:510] Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@5eaf3cf6: startup date [Thu Sep 28 09:18:45 CST 2017]; root of context hierarchy
+[INFO ][20170928 09:18:45,469][XmlBeanDefinitionReader:315] Loading XML bean definitions from class path resource [spring-rabbitmq/spring-context.xml]
+[INFO ][20170928 09:18:45,778][XmlBeanDefinitionReader:315] Loading XML bean definitions from class path resource [spring-rabbitmq/spring-rabbit-mq.xml]
+[INFO ][20170928 11:03:17,464][AbstractApplicationContext:510] Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@5eaf3cf6: startup date [Thu Sep 28 11:03:17 CST 2017]; root of context hierarchy
+[INFO ][20170928 11:03:17,538][XmlBeanDefinitionReader:315] Loading XML bean definitions from class path resource [spring-rabbitmq/spring-context.xml]
+[INFO ][20170928 11:03:17,835][XmlBeanDefinitionReader:315] Loading XML bean definitions from class path resource [spring-rabbitmq/spring-rabbit-mq.xml]

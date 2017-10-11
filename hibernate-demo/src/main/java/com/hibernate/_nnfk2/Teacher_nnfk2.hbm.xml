@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+
+
+<!-- 此为数据库表列与实体bean对象属性的映射配置文件 -->
+<!-- class类中的name属性对应数据库中的列column字段 -->
+<hibernate-mapping>
+
+	<class name="com.hibernate._nnfk2.Teacher_nnfk2" table="Teacher_nnfk2">
+	
+		<!-- cache启动缓冲加载usage模式，region为选择加载模式(在ehcache.xml中选择) -->
+		<cache usage="read-write" region="defaultCache" />
+		
+		<!-- name需要与实体bean对象中的属性名相同，column为数据库中字段列名 -->
+		
+		<id name="tchId" column="tch_Id">
+			<generator class="sequence">  <!-- generator为主键生成序列 -->
+				<param name="sequence">teacher2_seq</param>
+			</generator>
+		</id>
+		
+		<property name="tchName" column="tch_name"></property>
+		<property name="tchAge" column="tch_age"></property>
+		
+		<!-- 多对多中需要创建一张中间表，将两张表中的主键作为该表的字段， -->
+		<!-- key中为该表本身的主键字段名，与id中column对应 -->
+		<!-- many-to-many中的column对应该表中设置外键对应的泛型类的主键字段名 -->
+		<set name="stuSet" cascade="save-update" fetch="join" lazy="false">
+			<key column="tch_Id"></key>
+			<many-to-many class="com.hibernate._nnfk2.Student_nnfk2" column="stu_id"></many-to-many>
+		</set>
+		
+	</class>
+
+</hibernate-mapping>
